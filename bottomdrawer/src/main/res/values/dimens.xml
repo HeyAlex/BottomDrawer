@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="default_bottom_sheet_top_container_margin">0dp</dimen>
+</resources>

@@ -21,6 +21,10 @@ class BottomDrawer : FrameLayout {
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
 
+            params.topMargin =
+                //TODO make it configurable through attributes
+                resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
+
             layoutParams = params
         }
     }
