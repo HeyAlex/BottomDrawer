@@ -2,6 +2,7 @@ package com.github.heyalex.bottomdrawer
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 
@@ -27,5 +28,10 @@ class BottomDrawer : FrameLayout {
 
             layoutParams = params
         }
+        super.addView(container)
+    }
+
+    override fun addView(child: View?) {
+        container.addView(child)
     }
 }
