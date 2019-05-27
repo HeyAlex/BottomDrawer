@@ -148,4 +148,8 @@ class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.Bottom
         }
         return container
     }
+
+    override fun onBackPressed() {
+        behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+    }
 }
