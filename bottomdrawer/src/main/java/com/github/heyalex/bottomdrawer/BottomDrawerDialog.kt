@@ -79,6 +79,7 @@ class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.Bottom
             wrappedView = layoutInflater.inflate(layoutResId, coordinator, false)
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
+        behavior = BottomSheetBehavior.from(drawer)
 
         if (params == null) {
             drawer.addView(wrappedView)
