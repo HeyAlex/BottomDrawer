@@ -18,7 +18,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
 
-class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
+open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
     AppCompatDialog(context, theme) {
 
     private var behavior: BottomSheetBehavior<BottomDrawer>? = null
