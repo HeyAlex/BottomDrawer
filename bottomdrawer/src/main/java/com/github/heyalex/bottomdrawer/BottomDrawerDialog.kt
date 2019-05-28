@@ -80,6 +80,10 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
         behavior = BottomSheetBehavior.from(drawer)
+        behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        val metrics = context.resources.displayMetrics
+        behavior?.peekHeight = metrics.heightPixels / 2
+        behavior?.isHideable = true
 
         if (params == null) {
             drawer.addView(wrappedView)
