@@ -60,6 +60,27 @@ class BottomDrawer : FrameLayout {
     }
 
     fun onSlide(value: Float) {
-        TODO("add round effect")
+        if (value < offsetTrigger) {
+            if (!defaultCorner) {
+                background = ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
+                defaultCorner = true
+                invalidate()
+            }
+            return
+        }
+        if (defaultCorner) {
+            defaultCorner = false
+            background = null
+        }
+        val offset = ((value - offsetTrigger) * (1f / (1f - offsetTrigger)))
+        val invert = 1.0f - offset
+        currentCornerRadius = cornerRadius * invert
+        val fArr = cornerArray
+        fArr[3] = currentCornerRadius
+        fArr[2] = currentCornerRadius
+        fArr[1] = currentCornerRadius
+        fArr[0] = currentCornerRadius
+        cornerRadiusDrawable.cornerRadii = fArr
+        invalidate()
     }
 }
