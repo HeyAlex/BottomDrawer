@@ -23,8 +23,9 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     private var behavior: BottomSheetBehavior<BottomDrawer>? = null
     private lateinit var drawer: BottomDrawer
-
     private lateinit var coordinator: CoordinatorLayout
+
+    private var offset = 0f
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -91,10 +92,22 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             drawer.addView(wrappedView, params)
         }
 
+        coordinator.background.alpha = offset.toInt()
         behavior?.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                offset = if (slideOffset != slideOffset) {
+                    0f
+                } else {
+                    slideOffset
+                }
 
+                offset++
+                if (offset <= 1) {
+                    coordinator.background?.alpha = (255 * offset).toInt()
+                } else {
+                    coordinator.background?.alpha = 255
+                }
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
