@@ -110,6 +110,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                 } else {
                     coordinator.background?.alpha = 255
                 }
+                drawer.onSlide(offset / 2f)
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
