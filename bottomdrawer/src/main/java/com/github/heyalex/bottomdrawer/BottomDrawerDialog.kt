@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.design.widget.BottomSheetBehavior
@@ -23,8 +25,9 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     private var behavior: BottomSheetBehavior<BottomDrawer>? = null
     private lateinit var drawer: BottomDrawer
-
     private lateinit var coordinator: CoordinatorLayout
+
+    private var offset = 0f
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -80,6 +83,10 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
         behavior = BottomSheetBehavior.from(drawer)
+        behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        val metrics = context.resources.displayMetrics
+        behavior?.peekHeight = metrics.heightPixels / 2
+        behavior?.isHideable = true
 
         if (params == null) {
             drawer.addView(wrappedView)
@@ -87,10 +94,23 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             drawer.addView(wrappedView, params)
         }
 
+        coordinator.background.alpha = offset.toInt()
         behavior?.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                offset = if (slideOffset != slideOffset) {
+                    0f
+                } else {
+                    slideOffset
+                }
 
+                offset++
+                if (offset <= 1) {
+                    coordinator.background?.alpha = (255 * offset).toInt()
+                } else {
+                    coordinator.background?.alpha = 255
+                }
+                drawer.onSlide(offset / 2f)
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -147,6 +167,17 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             true
         }
         return container
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Handler(Looper.getMainLooper()).postDelayed({
+            behavior?.let {
+                if (window != null && it.state == BottomSheetBehavior.STATE_HIDDEN) {
+                    it.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                }
+            }
+        }, 150)
     }
 
     override fun onBackPressed() {
