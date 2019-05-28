@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.design.widget.BottomSheetBehavior
@@ -164,6 +166,17 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             true
         }
         return container
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Handler(Looper.getMainLooper()).postDelayed({
+            behavior?.let {
+                if (window != null && it.state == BottomSheetBehavior.STATE_HIDDEN) {
+                    it.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                }
+            }
+        }, 150)
     }
 
     override fun onBackPressed() {
