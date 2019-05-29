@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ class BottomDrawer : FrameLayout {
     private var container: FrameLayout
 
     private val cornerRadiusDrawable = GradientDrawable()
+    private val backgroundDrawable =
+        ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
     private val cornerArray: FloatArray =
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private val rect: Rect = Rect()
@@ -62,15 +65,15 @@ class BottomDrawer : FrameLayout {
     fun onSlide(value: Float) {
         if (value < offsetTrigger) {
             if (!defaultCorner) {
-                background = ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
+                ViewCompat.setBackground(this, backgroundDrawable)
                 defaultCorner = true
                 invalidate()
             }
             return
         }
         if (defaultCorner) {
+            ViewCompat.setBackground(this, null)
             defaultCorner = false
-            background = null
         }
         val offset = ((value - offsetTrigger) * (1f / (1f - offsetTrigger)))
         val invert = 1.0f - offset
