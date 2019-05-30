@@ -10,6 +10,8 @@ import android.view.ViewGroup
 
 abstract class BottomDrawerFragment : DialogFragment() {
 
+    private var bottomDrawerDialog: BottomDrawerDialog? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -20,6 +22,7 @@ abstract class BottomDrawerFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomDrawerDialog(context!!)
+        bottomDrawerDialog = dialog
         return dialog
     }
 
@@ -30,6 +33,10 @@ abstract class BottomDrawerFragment : DialogFragment() {
                 dismissAllowingStateLoss()
             }
         }
+    }
+
+    private fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
+        bottomDrawerDialog?.drawer?.addHandleView(view)
     }
 
     @LayoutRes

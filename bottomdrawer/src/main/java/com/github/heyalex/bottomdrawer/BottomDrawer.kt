@@ -10,8 +10,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 
-class BottomDrawer : FrameLayout {
+class BottomDrawer : LinearLayout {
 
     private var container: FrameLayout
     private val rect: Rect = Rect()
@@ -26,6 +27,7 @@ class BottomDrawer : FrameLayout {
     private var offsetTrigger: Float
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
+    private var translationUpdater: TranslationUpdater? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -58,6 +60,11 @@ class BottomDrawer : FrameLayout {
 
     override fun addView(child: View?) {
         container.addView(child)
+    }
+
+    fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
+        super.addView(view, 0)
+        translationUpdater = view
     }
 
     override fun onDraw(canvas: Canvas) {

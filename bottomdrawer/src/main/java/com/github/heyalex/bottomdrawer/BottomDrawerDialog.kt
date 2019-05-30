@@ -24,7 +24,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
     AppCompatDialog(context, theme) {
 
     private var behavior: BottomSheetBehavior<BottomDrawer>? = null
-    private lateinit var drawer: BottomDrawer
+    internal lateinit var drawer: BottomDrawer
     private lateinit var coordinator: CoordinatorLayout
 
     private var offset = 0f
