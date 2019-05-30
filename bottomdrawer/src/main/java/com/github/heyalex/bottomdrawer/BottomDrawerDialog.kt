@@ -177,7 +177,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                     it.state = BottomSheetBehavior.STATE_HALF_EXPANDED
                 }
             }
-        }, 150)
+        }, 50)
     }
 
     override fun onBackPressed() {
