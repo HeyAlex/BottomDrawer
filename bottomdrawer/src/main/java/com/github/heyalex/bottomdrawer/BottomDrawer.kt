@@ -1,6 +1,7 @@
 package com.github.heyalex.bottomdrawer
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.support.v4.content.ContextCompat
@@ -13,14 +14,13 @@ import android.widget.FrameLayout
 class BottomDrawer : FrameLayout {
 
     private var container: FrameLayout
-
-    private val cornerRadiusDrawable = GradientDrawable()
-    private val backgroundDrawable =
-        ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
-    private val cornerArray: FloatArray =
-        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private val rect: Rect = Rect()
 
+    private val backgroundDrawable =
+        ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
+    private val cornerRadiusDrawable = GradientDrawable()
+    private val cornerArray: FloatArray =
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float
     private var offsetTrigger: Float
@@ -32,11 +32,13 @@ class BottomDrawer : FrameLayout {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
         : super(context, attrs, defStyleAttr) {
+        setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
         cornerRadiusDrawable.setColor(drawerBackground)
         //TODO as attribute
         offsetTrigger = 0.75f
+
         container = FrameLayout(context).apply {
             val params =
                 FrameLayout.LayoutParams(
@@ -51,10 +53,18 @@ class BottomDrawer : FrameLayout {
             layoutParams = params
         }
         super.addView(container)
+        onSlide(0f)
     }
 
     override fun addView(child: View?) {
         container.addView(child)
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        if (!defaultCorner) {
+            cornerRadiusDrawable.bounds = rect
+            cornerRadiusDrawable.draw(canvas)
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -63,7 +73,7 @@ class BottomDrawer : FrameLayout {
     }
 
     fun onSlide(value: Float) {
-        if (value < offsetTrigger) {
+        if (value <= offsetTrigger) {
             if (!defaultCorner) {
                 ViewCompat.setBackground(this, backgroundDrawable)
                 defaultCorner = true

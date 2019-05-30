@@ -1,4 +1,4 @@
 <resources>
-    <dimen name="default_bottom_sheet_top_container_margin">0dp</dimen>
-    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="default_bottom_sheet_top_container_margin">20dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">10dp</dimen>
 </resources>
