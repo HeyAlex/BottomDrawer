@@ -38,7 +38,6 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         window?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

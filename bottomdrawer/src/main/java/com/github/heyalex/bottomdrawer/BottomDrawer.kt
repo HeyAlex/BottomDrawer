@@ -10,9 +10,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 
-class BottomDrawer : LinearLayout {
+class BottomDrawer : FrameLayout {
 
     private var container: FrameLayout
     private val rect: Rect = Rect()
@@ -63,7 +62,7 @@ class BottomDrawer : LinearLayout {
     }
 
     fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
-        super.addView(view, 0)
+        super.addView(view)
         translationUpdater = view
     }
 
@@ -86,6 +85,7 @@ class BottomDrawer : LinearLayout {
                 defaultCorner = true
                 invalidate()
             }
+            translationUpdater?.updateTranslation(0f)
             return
         }
         if (defaultCorner) {
@@ -93,6 +93,7 @@ class BottomDrawer : LinearLayout {
             defaultCorner = false
         }
         val offset = ((value - offsetTrigger) * (1f / (1f - offsetTrigger)))
+        translationUpdater?.updateTranslation(offset)
         val invert = 1.0f - offset
         currentCornerRadius = cornerRadius * invert
         val fArr = cornerArray

@@ -35,7 +35,7 @@ abstract class BottomDrawerFragment : DialogFragment() {
         }
     }
 
-    private fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
+    fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
         bottomDrawerDialog?.drawer?.addHandleView(view)
     }
 
