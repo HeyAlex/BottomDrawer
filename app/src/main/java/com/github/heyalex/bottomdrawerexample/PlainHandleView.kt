@@ -36,7 +36,9 @@ class PlainHandleView : View, TranslationUpdater {
 
     override fun onDraw(canvas: Canvas) {
         Log.d("rect", rect.toShortString())
-        canvas.drawRoundRect(rect, thickness, thickness, paint)
+        tempRect?.let{
+            canvas.drawRoundRect(it, thickness, thickness, paint)
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -44,10 +46,14 @@ class PlainHandleView : View, TranslationUpdater {
         rect.set(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat())
     }
 
+    private var tempRect: RectF? = null
+
     override fun updateTranslation(@FloatRange(from = 0.0, to = 1.0) value: Float) {
         Log.d("PlainHandleView", value.toString())
         if (value != currentOffset) {
             currentOffset = value
+            tempRect = RectF(rect.left, rect.top, rect.right, rect.bottom)
+            tempRect?.set(rect.left, rect.top, rect.right * currentOffset, rect.bottom)
             invalidate()
         }
     }

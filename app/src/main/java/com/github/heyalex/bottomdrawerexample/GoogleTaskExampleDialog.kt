@@ -10,8 +10,8 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
     override fun onStart() {
         super.onStart()
         addHandleView(PlainHandleView(context!!).apply {
-//            val widthHandle =
-//                resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_width)
+            val widthHandle =
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_width)
             val heightHandle =
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_height)
             val params =
