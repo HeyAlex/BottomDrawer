@@ -14,7 +14,7 @@ import com.github.heyalex.bottomdrawer.TranslationUpdater
 class PlainHandleView : View, TranslationUpdater {
 
     @FloatRange(from = 0.0, to = 1.0)
-    private var currentOffset = 0f
+    private var currentOffset = 1f
     private var rect = RectF()
     private var tempRect: RectF = RectF()
 
