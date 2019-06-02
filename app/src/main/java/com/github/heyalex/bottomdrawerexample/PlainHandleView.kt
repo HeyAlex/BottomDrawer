@@ -16,6 +16,7 @@ class PlainHandleView : View, TranslationUpdater {
     @FloatRange(from = 0.0, to = 1.0)
     private var currentOffset = 0f
     private var rect = RectF()
+    private var tempRect: RectF = RectF()
 
     private var paint = Paint()
     private var thickness =
@@ -35,25 +36,22 @@ class PlainHandleView : View, TranslationUpdater {
     }
 
     override fun onDraw(canvas: Canvas) {
-        Log.d("rect", rect.toShortString())
-        tempRect?.let{
-            canvas.drawRoundRect(it, thickness, thickness, paint)
-        }
+        canvas.drawRoundRect(tempRect, thickness, thickness, paint)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         rect.set(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat())
+        Log.d("rect", rect.toShortString())
     }
-
-    private var tempRect: RectF? = null
 
     override fun updateTranslation(@FloatRange(from = 0.0, to = 1.0) value: Float) {
         Log.d("PlainHandleView", value.toString())
         if (value != currentOffset) {
             currentOffset = value
-            tempRect = RectF(rect.left, rect.top, rect.right, rect.bottom)
-            tempRect?.set(rect.left, rect.top, rect.right * currentOffset, rect.bottom)
+            val offset = (width.toFloat() * currentOffset) / 2
+            Log.d("rect", "offset: $offset")
+            tempRect.set(0 + offset, 0f, width - offset, height.toFloat())
             invalidate()
         }
     }
