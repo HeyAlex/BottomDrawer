@@ -1,4 +1,4 @@
-package com.github.heyalex.bottomdrawerexample
+package com.github.heyalex.handle
 
 import android.content.Context
 import android.graphics.Canvas
@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import com.github.heyalex.bottomdrawer.R
 import com.github.heyalex.bottomdrawer.TranslationUpdater
 
 class PlainHandleView : View, TranslationUpdater {
@@ -31,13 +32,10 @@ class PlainHandleView : View, TranslationUpdater {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
         : super(context, attrs, defStyleAttr) {
         paint.apply {
-            color = ContextCompat.getColor(context, R.color.colorAccent)
+            color = ContextCompat.getColor(context, R.color.bottom_drawer_handle_view_color)
             strokeWidth = thickness
             flags = Paint.ANTI_ALIAS_FLAG
         }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            elevation = 100f
-//        }
     }
 
     override fun onDraw(canvas: Canvas) {
