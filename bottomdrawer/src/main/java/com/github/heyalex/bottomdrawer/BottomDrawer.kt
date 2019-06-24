@@ -30,6 +30,7 @@ class BottomDrawer : FrameLayout {
     private var diffWithStatusBar: Int = 0
     private var translationView: Float = 0f
 
+    //TODO as attribute
     private val shouldDrawUnder = false
 
     private var translationUpdater: TranslationUpdater? = null
