@@ -64,6 +64,7 @@ class BottomDrawer : FrameLayout {
             layoutParams = params
         }
         super.addView(container)
+        container.clipToPadding = false
         onSlide(0f)
     }
 
