@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
+import android.os.Build
 import android.support.annotation.FloatRange
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import com.github.heyalex.bottomdrawer.TranslationUpdater
 
 class PlainHandleView : View, TranslationUpdater {
@@ -33,6 +35,9 @@ class PlainHandleView : View, TranslationUpdater {
             strokeWidth = thickness
             flags = Paint.ANTI_ALIAS_FLAG
         }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            elevation = 100f
+//        }
     }
 
     override fun onDraw(canvas: Canvas) {

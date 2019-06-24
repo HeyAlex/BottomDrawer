@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
@@ -26,7 +27,13 @@ class BottomDrawer : FrameLayout {
     private var offsetTrigger: Float
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
+    private var diffWithStatusBar: Int = 0
+    private var translationView: Float = 0f
+
+    private val shouldDrawUnder = false
+
     private var translationUpdater: TranslationUpdater? = null
+    private var handleView: View? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -39,6 +46,8 @@ class BottomDrawer : FrameLayout {
         cornerRadiusDrawable.setColor(drawerBackground)
         //TODO as attribute
         offsetTrigger = 0.75f
+
+        calculateDiffStatusBar(0)
 
         container = FrameLayout(context).apply {
             val params =
@@ -63,6 +72,7 @@ class BottomDrawer : FrameLayout {
 
     fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
         super.addView(view)
+        handleView = view
         translationUpdater = view
     }
 
@@ -85,6 +95,10 @@ class BottomDrawer : FrameLayout {
                 defaultCorner = true
                 invalidate()
             }
+            container.translationY = 0f
+            if(!shouldDrawUnder) {
+                handleView?.translationY = 0f
+            }
             translationUpdater?.updateTranslation(0f)
             return
         }
@@ -93,6 +107,7 @@ class BottomDrawer : FrameLayout {
             defaultCorner = false
         }
         val offset = ((value - offsetTrigger) * (1f / (1f - offsetTrigger)))
+        translateViews(offset)
         translationUpdater?.updateTranslation(offset)
         val invert = 1.0f - offset
         currentCornerRadius = cornerRadius * invert
@@ -103,5 +118,38 @@ class BottomDrawer : FrameLayout {
         fArr[0] = currentCornerRadius
         cornerRadiusDrawable.cornerRadii = fArr
         invalidate()
+    }
+
+    internal fun translateViews(value: Float) {
+        translationView = diffWithStatusBar * value
+        container.translationY = translationView
+
+        if(!shouldDrawUnder) {
+            handleView?.translationY = translationView
+        }
+
+        val paddingBottom = translationView.toInt()
+        if (top == 0 && translationView != 0f && container.paddingBottom != paddingBottom) {
+            container.setPadding(0, 0, 0, paddingBottom)
+        }
+    }
+
+    private fun calculateDiffStatusBar(handleViewTopMargin: Int) {
+        val statusBarHeight = getStatusBarHeight(context)
+        diffWithStatusBar =
+            when {
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.M -> 0
+                handleViewTopMargin < statusBarHeight -> (statusBarHeight - handleViewTopMargin)
+                else -> 0
+            }
+    }
+
+    fun getStatusBarHeight(context: Context): Int {
+        var h = 0
+        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            h = context.resources.getDimensionPixelSize(resourceId)
+        }
+        return h
     }
 }
