@@ -1,15 +1,16 @@
 package com.github.heyalex.bottomdrawerexample
 
 import android.view.Gravity
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
+import com.github.heyalex.handle.PlainHandleView
+import com.github.heyalex.handle.PullHandleView
 
 class GoogleTaskExampleDialog : BottomDrawerFragment() {
 
     override fun onStart() {
         super.onStart()
-        addHandleView(PlainHandleView(context!!).apply {
+        addHandleView(PullHandleView(context!!).apply {
             val widthHandle =
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_width)
             val heightHandle =
