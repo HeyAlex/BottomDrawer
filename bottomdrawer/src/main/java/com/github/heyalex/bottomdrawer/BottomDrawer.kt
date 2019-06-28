@@ -24,14 +24,13 @@ class BottomDrawer : FrameLayout {
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float
-    private var offsetTrigger: Float
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
     private var translationView: Float = 0f
 
-    //TODO as attribute
-    private val shouldDrawUnder = false
+    private var shouldDrawUnderStatus = false
+    private var shouldDrawUnderHandle = false
 
     private var translationUpdater: TranslationUpdater? = null
     private var handleView: View? = null
@@ -45,8 +44,6 @@ class BottomDrawer : FrameLayout {
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
         cornerRadiusDrawable.setColor(drawerBackground)
-        //TODO as attribute
-        offsetTrigger = 0.75f
 
         calculateDiffStatusBar(0)
 
@@ -58,7 +55,6 @@ class BottomDrawer : FrameLayout {
                 )
 
             params.topMargin =
-                //TODO make it configurable through attributes
                 resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
 
             layoutParams = params
@@ -72,10 +68,27 @@ class BottomDrawer : FrameLayout {
         container.addView(child)
     }
 
-    fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
+    fun <T> addHandleView(
+        view: T,
+        shouldDrawUnderStatusBar: Boolean,
+        shouldDrawContentUnderHandle: Boolean
+    ) where T : View, T : TranslationUpdater {
         super.addView(view)
         handleView = view
+        shouldDrawUnderStatus = shouldDrawUnderStatusBar
+        shouldDrawUnderHandle = shouldDrawContentUnderHandle
+        if(!shouldDrawUnderHandle) {
+            val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
+            val height = marginLayoutParams.height + marginLayoutParams.topMargin
+            container.setMarginExtensionFunction(0, height, 0, 0)
+        }
         translationUpdater = view
+    }
+
+    private fun View.setMarginExtensionFunction(left: Int, top: Int, right: Int, bottom: Int) {
+        val params = layoutParams as ViewGroup.MarginLayoutParams
+        params.setMargins(left, top, right, bottom)
+        layoutParams = params
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -98,7 +111,7 @@ class BottomDrawer : FrameLayout {
                 invalidate()
             }
             container.translationY = 0f
-            if(!shouldDrawUnder) {
+            if (!shouldDrawUnderStatus) {
                 handleView?.translationY = 0f
             }
             translationUpdater?.updateTranslation(0f)
@@ -126,7 +139,7 @@ class BottomDrawer : FrameLayout {
         translationView = diffWithStatusBar * value
         container.translationY = translationView
 
-        if(!shouldDrawUnder) {
+        if (!shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
 
@@ -153,6 +166,10 @@ class BottomDrawer : FrameLayout {
             h = context.resources.getDimensionPixelSize(resourceId)
         }
         return h
+    }
+
+    companion object {
+        const val offsetTrigger: Float = 0.75f
     }
 
     //TODO save corner state by defining global layout listener

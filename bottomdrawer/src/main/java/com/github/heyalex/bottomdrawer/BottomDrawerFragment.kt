@@ -7,8 +7,9 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 
-abstract class BottomDrawerFragment : DialogFragment() {
+abstract class BottomDrawerFragment : DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
 
     private var bottomDrawerDialog: BottomDrawerDialog? = null
 
@@ -35,10 +36,22 @@ abstract class BottomDrawerFragment : DialogFragment() {
         }
     }
 
-    fun <T> addHandleView(view: T) where T : View, T : TranslationUpdater {
-        bottomDrawerDialog?.drawer?.addHandleView(view)
+    fun <T> addHandleView(
+        view: T,
+        shouldDraweUnderStatus: Boolean = false,
+        shouldDrawContentUnderHandle: Boolean = false
+    ) where T : View, T : TranslationUpdater {
+        bottomDrawerDialog?.drawer?.addHandleView(
+            view,
+            shouldDraweUnderStatus,
+            shouldDrawContentUnderHandle
+        )
     }
 
     @LayoutRes
     abstract fun getContainer(): Int
+
+    override fun onGlobalLayout() {
+        //TODO update drawer top for saving state
+    }
 }
