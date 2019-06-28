@@ -154,4 +154,6 @@ class BottomDrawer : FrameLayout {
         }
         return h
     }
+
+    //TODO save corner state by defining global layout listener
 }

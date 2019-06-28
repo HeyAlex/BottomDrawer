@@ -3,7 +3,6 @@ package com.github.heyalex.bottomdrawerexample
 import android.view.Gravity
 import android.widget.FrameLayout
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
-import com.github.heyalex.handle.PlainHandleView
 import com.github.heyalex.handle.PullHandleView
 
 class GoogleTaskExampleDialog : BottomDrawerFragment() {
