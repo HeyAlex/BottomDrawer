@@ -21,7 +21,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_height)
 
             layoutParams = params
-        })
+        }, false, true)
     }
 
     override fun getContainer(): Int {

@@ -111,7 +111,7 @@ class BottomDrawer : FrameLayout {
                 invalidate()
             }
             container.translationY = 0f
-            if (!shouldDrawUnderStatus) {
+            if (shouldDrawUnderStatus) {
                 handleView?.translationY = 0f
             }
             translationUpdater?.updateTranslation(0f)
@@ -139,7 +139,7 @@ class BottomDrawer : FrameLayout {
         translationView = diffWithStatusBar * value
         container.translationY = translationView
 
-        if (!shouldDrawUnderStatus) {
+        if (shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
 
