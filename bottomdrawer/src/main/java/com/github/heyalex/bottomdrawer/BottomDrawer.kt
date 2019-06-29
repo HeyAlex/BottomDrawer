@@ -77,11 +77,16 @@ class BottomDrawer : FrameLayout {
         handleView = view
         shouldDrawUnderStatus = shouldDrawUnderStatusBar
         shouldDrawUnderHandle = shouldDrawContentUnderHandle
-        if(!shouldDrawUnderHandle) {
-            val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
-            val height = marginLayoutParams.height + marginLayoutParams.topMargin
+        val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
+        val height = marginLayoutParams.height + marginLayoutParams.topMargin
+
+        if (!shouldDrawUnderStatus) {
+            calculateDiffStatusBar(height)
+        }
+        if (!shouldDrawUnderHandle) {
             container.setMarginExtensionFunction(0, height, 0, 0)
         }
+
         translationUpdater = view
     }
 
