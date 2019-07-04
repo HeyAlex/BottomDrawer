@@ -35,6 +35,12 @@ class BottomDrawer : FrameLayout {
     private var translationUpdater: TranslationUpdater? = null
     private var handleView: View? = null
 
+    private var isEnoughToFullExpand: Boolean = false
+    private var isEnoughToCollapseExpand: Boolean = false
+
+    private val fullHeight: Int
+    private val collapseHeight: Int
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
@@ -46,6 +52,10 @@ class BottomDrawer : FrameLayout {
         cornerRadiusDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
+
+        val heightPixels = context.resources.displayMetrics.heightPixels
+        fullHeight = heightPixels
+        collapseHeight = heightPixels / 2
 
         container = FrameLayout(context).apply {
             val params =
@@ -106,6 +116,13 @@ class BottomDrawer : FrameLayout {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         rect.set(left, top, right - left, bottom - top)
+
+        val measuredHeight = (container.parent as ViewGroup).measuredHeight
+        isEnoughToFullExpand =
+            measuredHeight >= fullHeight
+        isEnoughToCollapseExpand = measuredHeight > collapseHeight
+
+        defaultCorner = !isEnoughToFullExpand
     }
 
     fun onSlide(value: Float) {
