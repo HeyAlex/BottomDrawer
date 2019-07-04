@@ -38,12 +38,12 @@ abstract class BottomDrawerFragment : DialogFragment(), ViewTreeObserver.OnGloba
 
     fun <T> addHandleView(
         view: T,
-        shouldDraweUnderStatus: Boolean = false,
+        shouldDrawUnderStatus: Boolean = false,
         shouldDrawContentUnderHandle: Boolean = false
     ) where T : View, T : TranslationUpdater {
         bottomDrawerDialog?.drawer?.addHandleView(
             view,
-            shouldDraweUnderStatus,
+            shouldDrawUnderStatus,
             shouldDrawContentUnderHandle
         )
     }
