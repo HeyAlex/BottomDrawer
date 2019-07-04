@@ -52,6 +52,6 @@ abstract class BottomDrawerFragment : DialogFragment(), ViewTreeObserver.OnGloba
     abstract fun getContainer(): Int
 
     override fun onGlobalLayout() {
-        //TODO update drawer top for saving state
+        bottomDrawerDialog?.drawer?.globalTranslationViews()
     }
 }

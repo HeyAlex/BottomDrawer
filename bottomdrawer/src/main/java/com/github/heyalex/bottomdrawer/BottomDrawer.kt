@@ -157,10 +157,34 @@ class BottomDrawer : FrameLayout {
         invalidate()
     }
 
-    internal fun translateViews(value: Float) {
-        translationView = diffWithStatusBar * value
-        container.translationY = translationView
+    private fun translateViews(value: Float) {
+        translateViews(value, diffWithStatusBar)
+    }
 
+    internal fun globalTranslationViews() {
+        if (top == fullHeight - collapseHeight) {
+            //if view equals 50% percent and it can be fully expanded,
+            // also need to redraw with correct corner and offset
+            defaultCorner = true
+            translationUpdater?.updateTranslation(0f)
+        }
+
+        if (isEnoughToFullExpand) {
+            //if view is expanded, we need to make a correct translation depends on change orientation
+            val diff = diffWithStatusBar - top
+            val translationView = if (diff in 0..diffWithStatusBar) {
+                diff.toFloat()
+            } else {
+                0f
+            }
+            translateViews(1f, translationView.toInt())
+        }
+    }
+
+
+    internal fun translateViews(offset: Float, height: Int) {
+        translationView = height * offset
+        container.translationY = translationView
         if (shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
