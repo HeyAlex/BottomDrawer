@@ -4,13 +4,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import android.os.Build
+import android.os.Parcel
+import android.os.Parcelable
 import android.support.annotation.FloatRange
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import com.github.heyalex.bottomdrawer.R
 import com.github.heyalex.bottomdrawer.TranslationUpdater
 
@@ -45,17 +45,60 @@ class PlainHandleView : View, TranslationUpdater {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         rect.set(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat())
-        Log.d("rect", rect.toShortString())
     }
 
     override fun updateTranslation(@FloatRange(from = 0.0, to = 1.0) value: Float) {
-        Log.d("PlainHandleView", value.toString())
         if (value != currentOffset) {
             currentOffset = value
             val offset = (width.toFloat() * currentOffset) / 2
-            Log.d("rect", "offset: $offset")
             tempRect.set(0 + offset, 0f, width - offset, height.toFloat())
             invalidate()
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState()
+        superState?.let {
+            val customViewSavedState = PullHandleViewSavedState(superState)
+            customViewSavedState.offset = currentOffset
+            return customViewSavedState
+        }
+        return superState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable) {
+        val customViewSavedState = state as PullHandleViewSavedState
+        currentOffset = customViewSavedState.offset
+        super.onRestoreInstanceState(customViewSavedState.superState)
+    }
+
+    private class PullHandleViewSavedState : BaseSavedState {
+
+        internal var offset: Float = 0f
+
+        constructor(superState: Parcelable) : super(superState)
+
+        private constructor(source: Parcel) : super(source) {
+            offset = source.readFloat()
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeFloat(offset)
+        }
+
+        companion object CREATOR : Parcelable.Creator<PullHandleViewSavedState> {
+            override fun createFromParcel(source: Parcel): PullHandleViewSavedState {
+                return PullHandleViewSavedState(source)
+            }
+
+            override fun newArray(size: Int): Array<PullHandleViewSavedState?> {
+                return arrayOfNulls(size)
+            }
+        }
+
+        override fun describeContents(): Int {
+            return 0
         }
     }
 }
