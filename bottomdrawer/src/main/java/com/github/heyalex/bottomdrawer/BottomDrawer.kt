@@ -206,17 +206,15 @@ class BottomDrawer : FrameLayout {
     }
 
     fun getStatusBarHeight(context: Context): Int {
-        var h = 0
+        var height = 0
         val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
-            h = context.resources.getDimensionPixelSize(resourceId)
+            height = context.resources.getDimensionPixelSize(resourceId)
         }
-        return h
+        return height
     }
 
     companion object {
         const val offsetTrigger: Float = 0.75f
     }
-
-    //TODO save corner state by defining global layout listener
 }
