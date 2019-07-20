@@ -24,6 +24,7 @@ class BottomDrawer : FrameLayout {
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float
+    private var extraPadding: Int
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
@@ -49,6 +50,7 @@ class BottomDrawer : FrameLayout {
         setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
+        extraPadding = resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
         cornerRadiusDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
@@ -98,12 +100,6 @@ class BottomDrawer : FrameLayout {
         }
 
         translationUpdater = view
-    }
-
-    private fun View.setMarginExtensionFunction(left: Int, top: Int, right: Int, bottom: Int) {
-        val params = layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(left, top, right, bottom)
-        layoutParams = params
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -203,6 +199,8 @@ class BottomDrawer : FrameLayout {
                 handleViewTopMargin < statusBarHeight -> (statusBarHeight - handleViewTopMargin)
                 else -> 0
             }
+
+        diffWithStatusBar += extraPadding
     }
 
     fun getStatusBarHeight(context: Context): Int {
@@ -212,6 +210,12 @@ class BottomDrawer : FrameLayout {
             height = context.resources.getDimensionPixelSize(resourceId)
         }
         return height
+    }
+
+    private fun View.setMarginExtensionFunction(left: Int, top: Int, right: Int, bottom: Int) {
+        val params = layoutParams as ViewGroup.MarginLayoutParams
+        params.setMargins(left, top, right, bottom)
+        layoutParams = params
     }
 
     companion object {

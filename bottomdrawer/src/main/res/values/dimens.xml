@@ -2,4 +2,5 @@
     <dimen name="default_bottom_sheet_top_container_margin">14dp</dimen>
     <dimen name="bottom_sheet_handle_thickness">6dp</dimen>
     <dimen name="bottom_sheet_corner_radius">10dp</dimen>
+    <dimen name="bottom_sheet_extra_padding">14dp</dimen>
 </resources>
