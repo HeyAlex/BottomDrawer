@@ -49,6 +49,13 @@ abstract class BottomDrawerFragment : DialogFragment(), ViewTreeObserver.OnGloba
         )
     }
 
+    fun dismissWithBehavior() {
+        bottomDrawerDialog?.behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    fun getCurrentState(): Int? {
+        return bottomDrawerDialog?.behavior?.state
+    }
 
     @LayoutRes
     abstract fun getContainer(): Int

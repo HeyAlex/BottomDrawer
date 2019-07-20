@@ -34,6 +34,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
                 cancelButton.isEnabled = slideOffset > 0
             }
         }
+        cancelButton.setOnClickListener { dismissWithBehavior() }
         return view
     }
 
