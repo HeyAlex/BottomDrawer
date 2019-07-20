@@ -19,13 +19,16 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
+import java.util.concurrent.CopyOnWriteArrayList
 
 open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
     AppCompatDialog(context, theme) {
 
-    private var behavior: BottomSheetBehavior<BottomDrawer>? = null
+    internal var behavior: BottomSheetBehavior<BottomDrawer>? = null
     internal lateinit var drawer: BottomDrawer
     private lateinit var coordinator: CoordinatorLayout
+    private val callbacks: CopyOnWriteArrayList<BottomSheetBehavior.BottomSheetCallback> =
+        CopyOnWriteArrayList()
 
     private var offset = 0f
 
@@ -94,9 +97,24 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         }
 
         coordinator.background.alpha = offset.toInt()
+
         behavior?.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(sheet: View, state: Int) {
+                callbacks.forEach { callback ->
+                    callback.onStateChanged(sheet, state)
+                }
+            }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                callbacks.forEach { callback ->
+                    callback.onSlide(bottomSheet, slideOffset)
+                }
+            }
+        })
+
+        addBottomSheetCallback {
+            onSlide { _: View, slideOffset: Float ->
                 offset = if (slideOffset != slideOffset) {
                     0f
                 } else {
@@ -112,7 +130,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                 drawer.onSlide(offset / 2f)
             }
 
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+            onStateChanged { _: View, newState: Int ->
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
 
@@ -131,7 +149,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                     }
                 }
             }
-        })
+        }
 
         coordinator.findViewById<View>(R.id.touch_outside)
             .setOnClickListener {
@@ -181,5 +199,37 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     override fun onBackPressed() {
         behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    fun addBottomSheetCallback(func: BottomSheetCallback.() -> Unit): BottomSheetBehavior.BottomSheetCallback {
+        val listener = BottomSheetCallback()
+        listener.func()
+        callbacks.add(listener)
+        return listener
+    }
+
+    fun removeBottomSheetCallback(callback: BottomSheetBehavior.BottomSheetCallback) {
+        callbacks.remove(callback)
+    }
+
+    class BottomSheetCallback : BottomSheetBehavior.BottomSheetCallback() {
+        private var _onSlide: ((view: View, slideOffset: Float) -> Unit)? = null
+        private var _onStateChanged: ((view: View, state: Int) -> Unit)? = null
+
+        override fun onSlide(view: View, slideOffset: Float) {
+            _onSlide?.invoke(view, slideOffset)
+        }
+
+        fun onSlide(func: (view: View, slideOffset: Float) -> Unit) {
+            _onSlide = func
+        }
+
+        override fun onStateChanged(view: View, state: Int) {
+            _onStateChanged?.invoke(view, state)
+        }
+
+        fun onStateChanged(func: (view: View, state: Int) -> Unit) {
+            _onStateChanged = func
+        }
     }
 }

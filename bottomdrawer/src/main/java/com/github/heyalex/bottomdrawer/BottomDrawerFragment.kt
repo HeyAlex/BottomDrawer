@@ -3,6 +3,7 @@ package com.github.heyalex.bottomdrawer
 import android.app.Dialog
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,10 +49,19 @@ abstract class BottomDrawerFragment : DialogFragment(), ViewTreeObserver.OnGloba
         )
     }
 
+
     @LayoutRes
     abstract fun getContainer(): Int
 
     override fun onGlobalLayout() {
         bottomDrawerDialog?.drawer?.globalTranslationViews()
+    }
+
+    fun addBottomSheetCallback(func: BottomDrawerDialog.BottomSheetCallback.() -> Unit): BottomSheetBehavior.BottomSheetCallback? {
+        return bottomDrawerDialog?.addBottomSheetCallback(func)
+    }
+
+    fun removeBottomSheetCallback(callback: BottomSheetBehavior.BottomSheetCallback) {
+        bottomDrawerDialog?.removeBottomSheetCallback(callback)
     }
 }
