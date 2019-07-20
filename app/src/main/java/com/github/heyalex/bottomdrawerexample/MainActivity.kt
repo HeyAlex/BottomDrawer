@@ -13,6 +13,5 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager?.beginTransaction()
                 ?.add(GoogleTaskExampleDialog(), "test")?.commit()
         }
-
     }
 }

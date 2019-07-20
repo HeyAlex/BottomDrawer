@@ -1,12 +1,41 @@
 package com.github.heyalex.bottomdrawerexample
 
+import android.app.Dialog
+import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PlainHandleView
-import com.github.heyalex.handle.PullHandleView
 
 class GoogleTaskExampleDialog : BottomDrawerFragment() {
+
+    private lateinit var cancelButton: ImageView
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+
+        return dialog
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        cancelButton = view.findViewById(R.id.cancel)
+        addBottomSheetCallback {
+            onSlide { _, slideOffset ->
+                cancelButton.alpha = slideOffset
+                cancelButton.isEnabled = slideOffset > 0
+            }
+        }
+        return view
+    }
 
     override fun onStart() {
         super.onStart()
@@ -22,7 +51,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_height)
 
             layoutParams = params
-        }, false, false)
+        })
     }
 
     override fun getContainer(): Int {
