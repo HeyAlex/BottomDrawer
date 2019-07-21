@@ -1,6 +1,5 @@
 package com.github.heyalex.bottomdrawerexample
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,12 +12,8 @@ import com.github.heyalex.handle.PlainHandleView
 
 class GoogleTaskExampleDialog : BottomDrawerFragment() {
 
+    private var alphaCancelButton = 0f
     private lateinit var cancelButton: ImageView
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-
-        return dialog
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +25,9 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         val percent = 0.65f
         addBottomSheetCallback {
             onSlide { _, slideOffset ->
-                val alpha = (slideOffset - percent) * (1f / (1f - percent))
-                cancelButton.alpha = alpha
-                cancelButton.isEnabled = slideOffset > 0
+                alphaCancelButton = (slideOffset - percent) * (1f / (1f - percent))
+                cancelButton.alpha = alphaCancelButton
+                cancelButton.isEnabled = alphaCancelButton > 0
             }
         }
         cancelButton.setOnClickListener { dismissWithBehavior() }
