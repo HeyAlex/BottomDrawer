@@ -45,7 +45,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
                 FrameLayout.LayoutParams(widthHandle, heightHandle, Gravity.CENTER_HORIZONTAL)
 
             params.topMargin =
-                resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_height)
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_top_margin)
 
             layoutParams = params
         })
