@@ -6,8 +6,8 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.FloatRange
-import android.support.v4.content.ContextCompat
+import androidx.annotation.FloatRange
+import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
