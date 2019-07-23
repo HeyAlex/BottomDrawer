@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="16dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp">
 
@@ -17,17 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
+            app:animation_duration="250"
             app:cardCornerRadius="0dp"
             app:content_view="@layout/profile_content"
             app:expanded="false"
-            app:animation_duration="250"
-            tools:expanded="true"
-            app:header_view="@layout/profile_header" />
-    </RelativeLayout>
+            app:header_view="@layout/profile_header"
+            tools:expanded="true" />
+    </FrameLayout>
 
-    <View
-        style="@style/Divider.Horizontal"
-        android:layout_marginTop="12dp" />
+    <View style="@style/Divider.Horizontal" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
