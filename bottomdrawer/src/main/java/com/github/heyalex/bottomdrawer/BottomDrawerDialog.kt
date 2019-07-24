@@ -6,19 +6,19 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.annotation.LayoutRes
-import androidx.annotation.StyleRes
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.AccessibilityDelegateCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import androidx.appcompat.app.AppCompatDialog
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.app.AppCompatDialog
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.util.concurrent.CopyOnWriteArrayList
 
 open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
@@ -122,11 +122,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                 }
 
                 offset++
-                if (offset <= 1) {
-                    coordinator.background?.alpha = (255 * offset).toInt()
-                } else {
-                    coordinator.background?.alpha = 255
-                }
+                updateBackgroundOffset()
                 drawer.onSlide(offset / 2f)
             }
 
@@ -210,6 +206,26 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     fun removeBottomSheetCallback(callback: BottomSheetBehavior.BottomSheetCallback) {
         callbacks.remove(callback)
+    }
+
+    override fun onSaveInstanceState(): Bundle? {
+        val superState = super.onSaveInstanceState()
+        superState.putFloat("offset", offset)
+        return superState
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        offset = savedInstanceState.getFloat("offset")
+        updateBackgroundOffset()
+    }
+
+    private fun updateBackgroundOffset() {
+        if (offset <= 1) {
+            coordinator.background?.alpha = (255 * offset).toInt()
+        } else {
+            coordinator.background?.alpha = 255
+        }
     }
 
     class BottomSheetCallback : BottomSheetBehavior.BottomSheetCallback() {
