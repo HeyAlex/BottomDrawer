@@ -10,8 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         show_button.setOnClickListener {
-            supportFragmentManager?.beginTransaction()
-                ?.add(GoogleTaskExampleDialog(), "test")?.commit()
+            supportFragmentManager?.beginTransaction()?.add(GoogleTaskExampleDialog(), "test")?.commit()
         }
     }
 }

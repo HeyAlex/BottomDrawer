@@ -122,6 +122,10 @@ class BottomDrawer : FrameLayout {
     }
 
     fun onSlide(value: Float) {
+        if (handleNonExpandableViews(value)) {
+            return
+        }
+
         if (value <= offsetTrigger) {
             if (!defaultCorner) {
                 ViewCompat.setBackground(this, backgroundDrawable)
@@ -151,6 +155,20 @@ class BottomDrawer : FrameLayout {
         fArr[0] = currentCornerRadius
         cornerRadiusDrawable.cornerRadii = fArr
         invalidate()
+    }
+
+    private fun handleNonExpandableViews(value: Float): Boolean {
+        if (!isEnoughToFullExpand) {
+            if (!defaultCorner) {
+                ViewCompat.setBackground(this, backgroundDrawable)
+                defaultCorner = true
+            }
+
+            translationUpdater?.updateTranslation(0f)
+            translateViews(0f)
+            return true
+        }
+        return false
     }
 
     private fun translateViews(value: Float) {
@@ -203,7 +221,7 @@ class BottomDrawer : FrameLayout {
         diffWithStatusBar += extraPadding
     }
 
-    fun getStatusBarHeight(context: Context): Int {
+    private fun getStatusBarHeight(context: Context): Int {
         var height = 0
         val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
