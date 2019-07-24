@@ -3,7 +3,6 @@ package com.github.heyalex.bottomdrawer
 import android.app.Dialog
 import android.os.Bundle
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +29,7 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
 
     override fun onStart() {
         super.onStart()
+        bottomDrawerDialog?.drawer?.viewTreeObserver?.addOnGlobalLayoutListener(this)
         dialog.setOnDismissListener {
             if (isAdded) {
                 dismissAllowingStateLoss()
