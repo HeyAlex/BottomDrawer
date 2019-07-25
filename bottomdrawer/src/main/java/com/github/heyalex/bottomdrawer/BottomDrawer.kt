@@ -122,7 +122,7 @@ class BottomDrawer : FrameLayout {
     }
 
     fun onSlide(value: Float) {
-        if (handleNonExpandableViews(value)) {
+        if (handleNonExpandableViews()) {
             return
         }
 
@@ -157,7 +157,7 @@ class BottomDrawer : FrameLayout {
         invalidate()
     }
 
-    private fun handleNonExpandableViews(value: Float): Boolean {
+    private fun handleNonExpandableViews(): Boolean {
         if (!isEnoughToFullExpand) {
             if (!defaultCorner) {
                 ViewCompat.setBackground(this, backgroundDrawable)
@@ -176,13 +176,6 @@ class BottomDrawer : FrameLayout {
     }
 
     internal fun globalTranslationViews() {
-        if (top == fullHeight - collapseHeight) {
-            //if view equals 50% percent and it can be fully expanded,
-            // also need to redraw with correct corner and offset
-            defaultCorner = true
-            translationUpdater?.updateTranslation(0f)
-        }
-
         if (isEnoughToFullExpand) {
             //if view is expanded, we need to make a correct translation depends on change orientation
             val diff = diffWithStatusBar - top
@@ -192,6 +185,9 @@ class BottomDrawer : FrameLayout {
                 0f
             }
             translateViews(1f, translationView.toInt())
+        } else {
+            defaultCorner = true
+            translationUpdater?.updateTranslation(0f)
         }
     }
 

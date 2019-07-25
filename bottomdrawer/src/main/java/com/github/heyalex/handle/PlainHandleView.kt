@@ -6,18 +6,18 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.FloatRange
-import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.annotation.FloatRange
+import androidx.core.content.ContextCompat
 import com.github.heyalex.bottomdrawer.R
 import com.github.heyalex.bottomdrawer.TranslationUpdater
 
 class PlainHandleView : View, TranslationUpdater {
 
     @FloatRange(from = 0.0, to = 1.0)
-    private var currentOffset = 1f
+    private var currentOffset = 0f
     private var rect = RectF()
     private var tempRect: RectF = RectF()
 
@@ -36,6 +36,7 @@ class PlainHandleView : View, TranslationUpdater {
             strokeWidth = thickness
             flags = Paint.ANTI_ALIAS_FLAG
         }
+        isSaveEnabled = true
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -48,18 +49,16 @@ class PlainHandleView : View, TranslationUpdater {
     }
 
     override fun updateTranslation(@FloatRange(from = 0.0, to = 1.0) value: Float) {
-        if (value != currentOffset) {
-            currentOffset = value
-            val offset = (width.toFloat() * currentOffset) / 2
-            tempRect.set(0 + offset, 0f, width - offset, height.toFloat())
-            invalidate()
-        }
+        currentOffset = value
+        val offset = (width.toFloat() * currentOffset) / 2
+        tempRect.set(0 + offset, 0f, width - offset, height.toFloat())
+        invalidate()
     }
 
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()
         superState?.let {
-            val customViewSavedState = PullHandleViewSavedState(superState)
+            val customViewSavedState = PlainHandleViewSavedState(superState)
             customViewSavedState.offset = currentOffset
             return customViewSavedState
         }
@@ -67,12 +66,15 @@ class PlainHandleView : View, TranslationUpdater {
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
-        val customViewSavedState = state as PullHandleViewSavedState
+        Log.d("show_handle", "restore")
+        val customViewSavedState = state as PlainHandleViewSavedState
         currentOffset = customViewSavedState.offset
+        val offset = (width.toFloat() * currentOffset) / 2
+        tempRect.set(0 + offset, 0f, width - offset, height.toFloat())
         super.onRestoreInstanceState(customViewSavedState.superState)
     }
 
-    private class PullHandleViewSavedState : BaseSavedState {
+    private class PlainHandleViewSavedState : BaseSavedState {
 
         internal var offset: Float = 0f
 
@@ -87,12 +89,12 @@ class PlainHandleView : View, TranslationUpdater {
             out.writeFloat(offset)
         }
 
-        companion object CREATOR : Parcelable.Creator<PullHandleViewSavedState> {
-            override fun createFromParcel(source: Parcel): PullHandleViewSavedState {
-                return PullHandleViewSavedState(source)
+        companion object CREATOR : Parcelable.Creator<PlainHandleViewSavedState> {
+            override fun createFromParcel(source: Parcel): PlainHandleViewSavedState {
+                return PlainHandleViewSavedState(source)
             }
 
-            override fun newArray(size: Int): Array<PullHandleViewSavedState?> {
+            override fun newArray(size: Int): Array<PlainHandleViewSavedState?> {
                 return arrayOfNulls(size)
             }
         }
