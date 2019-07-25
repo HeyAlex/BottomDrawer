@@ -12,5 +12,9 @@ class MainActivity : AppCompatActivity() {
         show_button.setOnClickListener {
             supportFragmentManager?.beginTransaction()?.add(GoogleTaskExampleDialog(), "test")?.commit()
         }
+
+        show_button_sample.setOnClickListener {
+            supportFragmentManager?.beginTransaction()?.add(CustomExampleDialog(), "test1")?.commit()
+        }
     }
 }
