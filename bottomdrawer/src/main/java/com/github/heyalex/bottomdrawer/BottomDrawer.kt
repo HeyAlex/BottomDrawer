@@ -191,8 +191,7 @@ class BottomDrawer : FrameLayout {
         }
     }
 
-
-    internal fun translateViews(offset: Float, height: Int) {
+    private fun translateViews(offset: Float, height: Int) {
         translationView = height * offset
         container.translationY = translationView
         if (shouldDrawUnderStatus) {
