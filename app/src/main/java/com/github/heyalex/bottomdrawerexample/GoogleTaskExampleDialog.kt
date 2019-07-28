@@ -54,4 +54,8 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
     override fun getContainer(): Int {
         return R.layout.google_task_example_layout
     }
+
+    override fun getStyle(): Int {
+        return R.style.Plain
+    }
 }

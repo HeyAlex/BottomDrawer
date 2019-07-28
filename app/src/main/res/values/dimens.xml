@@ -6,5 +6,5 @@
 
     <dimen name="sample_bottom_sheet_handle_width">40dp</dimen>
     <dimen name="sample_bottom_sheet_handle_height">12dp</dimen>
-    <dimen name="sample_bottom_sheet_handle_top_margin">4dp</dimen>
+    <dimen name="sample_bottom_sheet_handle_top_margin">0dp</dimen>
 </resources>
