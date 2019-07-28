@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
@@ -18,8 +19,7 @@ class BottomDrawer : FrameLayout {
     private var container: FrameLayout
     private val rect: Rect = Rect()
 
-    private val backgroundDrawable =
-        ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
+    private var defaultBackgroundDrawable: Drawable? = null
     private val cornerRadiusDrawable = GradientDrawable()
     private val cornerArray: FloatArray =
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
@@ -92,6 +92,10 @@ class BottomDrawer : FrameLayout {
                 resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
             )
 
+            defaultBackgroundDrawable = attr.getDrawable(
+                R.styleable.BottomDrawer_bottom_drawer_background
+            ) ?: ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
+
             cornerRadius = attr.getDimensionPixelSize(
                 R.styleable.BottomDrawer_bottom_sheet_corner_radius,
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius)
@@ -153,7 +157,7 @@ class BottomDrawer : FrameLayout {
 
         if (value <= offsetTrigger) {
             if (!defaultCorner) {
-                ViewCompat.setBackground(this, backgroundDrawable)
+                ViewCompat.setBackground(this, defaultBackgroundDrawable)
                 defaultCorner = true
                 invalidate()
             }
@@ -185,7 +189,7 @@ class BottomDrawer : FrameLayout {
     private fun handleNonExpandableViews(): Boolean {
         if (!isEnoughToFullExpand) {
             if (!defaultCorner) {
-                ViewCompat.setBackground(this, backgroundDrawable)
+                ViewCompat.setBackground(this, defaultBackgroundDrawable)
                 defaultCorner = true
             }
 
