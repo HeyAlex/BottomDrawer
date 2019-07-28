@@ -53,7 +53,6 @@ class BottomDrawer : FrameLayout {
         setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
-//        extraPadding = resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
         cornerRadiusDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
@@ -84,7 +83,8 @@ class BottomDrawer : FrameLayout {
         try {
             attr = context.obtainStyledAttributes(attrs, R.styleable.BottomDrawer, 0, 0)
             extraPadding = attr!!.getDimensionPixelSize(
-                R.styleable.BottomDrawer_bottom_sheet_extra_padding, 0
+                R.styleable.BottomDrawer_bottom_sheet_extra_padding,
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
             )
         } finally {
             attr?.recycle()
