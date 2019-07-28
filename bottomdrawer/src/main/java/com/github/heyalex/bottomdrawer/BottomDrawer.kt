@@ -26,6 +26,7 @@ class BottomDrawer : FrameLayout {
     private var drawerBackground: Int
     private var cornerRadius: Float
     private var extraPadding: Int = 0
+    private var defaultContainerMargin: Int = 0
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
@@ -68,8 +69,8 @@ class BottomDrawer : FrameLayout {
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
 
-            params.topMargin =
-                resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
+            params.topMargin = defaultContainerMargin
+
 
             layoutParams = params
         }
@@ -85,6 +86,11 @@ class BottomDrawer : FrameLayout {
             extraPadding = attr!!.getDimensionPixelSize(
                 R.styleable.BottomDrawer_bottom_sheet_extra_padding,
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
+            )
+
+            defaultContainerMargin = attr.getDimensionPixelSize(
+                R.styleable.BottomDrawer_default_bottom_sheet_top_container_margin,
+                resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
             )
         } finally {
             attr?.recycle()
