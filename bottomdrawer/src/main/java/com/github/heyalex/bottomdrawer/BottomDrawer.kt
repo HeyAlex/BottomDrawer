@@ -1,16 +1,17 @@
 package com.github.heyalex.bottomdrawer
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 
 class BottomDrawer : FrameLayout {
 
@@ -24,7 +25,7 @@ class BottomDrawer : FrameLayout {
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float
-    private var extraPadding: Int
+    private var extraPadding: Int = 0
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
@@ -47,10 +48,12 @@ class BottomDrawer : FrameLayout {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
         : super(context, attrs, defStyleAttr) {
+
+        initAttributes(context, attrs)
         setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
-        extraPadding = resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
+//        extraPadding = resources.getDimensionPixelSize(R.dimen.bottom_sheet_extra_padding)
         cornerRadiusDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
@@ -74,6 +77,18 @@ class BottomDrawer : FrameLayout {
         super.addView(container)
         container.clipToPadding = false
         onSlide(0f)
+    }
+
+    private fun initAttributes(context: Context, attrs: AttributeSet?) {
+        var attr: TypedArray? = null
+        try {
+            attr = context.obtainStyledAttributes(attrs, R.styleable.BottomDrawer, 0, 0)
+            extraPadding = attr!!.getDimensionPixelSize(
+                R.styleable.BottomDrawer_bottom_sheet_extra_padding, 0
+            )
+        } finally {
+            attr?.recycle()
+        }
     }
 
     override fun addView(child: View?) {
