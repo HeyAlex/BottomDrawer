@@ -16,4 +16,12 @@
         <item name="android:layout_height">1dp</item>
     </style>
 
+    <style name="Plain" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">14dp</item>
+    </style>
+
+    <style name="Pull" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">0dp</item>
+    </style>
+
 </resources>
