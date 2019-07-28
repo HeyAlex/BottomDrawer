@@ -24,7 +24,7 @@ class BottomDrawer : FrameLayout {
     private val cornerArray: FloatArray =
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
-    private var cornerRadius: Float
+    private var cornerRadius: Float = 0f
     private var extraPadding: Int = 0
     private var defaultContainerMargin: Int = 0
     private var currentCornerRadius: Float = 0f
@@ -53,7 +53,6 @@ class BottomDrawer : FrameLayout {
         initAttributes(context, attrs)
         setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
-        cornerRadius = resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius).toFloat()
         cornerRadiusDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
@@ -92,6 +91,11 @@ class BottomDrawer : FrameLayout {
                 R.styleable.BottomDrawer_default_bottom_sheet_top_container_margin,
                 resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
             )
+
+            cornerRadius = attr.getDimensionPixelSize(
+                R.styleable.BottomDrawer_bottom_sheet_corner_radius,
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius)
+            ).toFloat()
         } finally {
             attr?.recycle()
         }
