@@ -35,9 +35,8 @@ class CustomExampleDialog : BottomDrawerFragment() {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        addHandleView(PullHandleView(context!!).apply {
+    override fun getHandleView(): View {
+        return PullHandleView(context!!).apply {
             val widthHandle =
                 resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_width)
             val heightHandle =
@@ -49,7 +48,7 @@ class CustomExampleDialog : BottomDrawerFragment() {
                 resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_top_margin)
 
             layoutParams = params
-        }, true, false)
+        }
     }
 
     override fun getContainer(): Int {

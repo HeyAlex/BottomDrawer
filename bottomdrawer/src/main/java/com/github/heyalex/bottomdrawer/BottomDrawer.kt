@@ -109,11 +109,11 @@ class BottomDrawer : FrameLayout {
         container.addView(child)
     }
 
-    fun <T> addHandleView(
-        view: T,
+    fun addHandleView(
+        view: View,
         shouldDrawUnderStatusBar: Boolean,
         shouldDrawContentUnderHandle: Boolean
-    ) where T : View, T : TranslationUpdater {
+    ) {
         super.addView(view)
         handleView = view
         shouldDrawUnderStatus = shouldDrawUnderStatusBar
@@ -128,7 +128,7 @@ class BottomDrawer : FrameLayout {
             container.setMarginExtensionFunction(0, height, 0, 0)
         }
 
-        translationUpdater = view
+        translationUpdater = view as TranslationUpdater
     }
 
     override fun onDraw(canvas: Canvas) {

@@ -30,6 +30,7 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
 
     override fun onStart() {
         super.onStart()
+        addHandleView()
         bottomDrawerDialog?.drawer?.viewTreeObserver?.addOnGlobalLayoutListener(this)
         dialog.setOnDismissListener {
             if (isAdded) {
@@ -38,17 +39,18 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         }
     }
 
-    fun <T> addHandleView(
-        view: T,
+    private fun addHandleView(
         shouldDrawUnderStatus: Boolean = false,
         shouldDrawContentUnderHandle: Boolean = false
-    ) where T : View, T : TranslationUpdater {
+    ) {
         bottomDrawerDialog?.drawer?.addHandleView(
-            view,
+            getHandleView(),
             shouldDrawUnderStatus,
             shouldDrawContentUnderHandle
         )
     }
+
+    abstract fun getHandleView(): View
 
     fun dismissWithBehavior() {
         bottomDrawerDialog?.behavior?.state = BottomSheetBehavior.STATE_HIDDEN
