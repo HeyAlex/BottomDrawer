@@ -128,20 +128,8 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
             onStateChanged { _: View, newState: Int ->
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-
-                    }
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         dismiss()
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-
                     }
                 }
             }
