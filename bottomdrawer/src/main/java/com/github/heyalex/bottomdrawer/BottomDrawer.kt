@@ -100,6 +100,17 @@ class BottomDrawer : FrameLayout {
                 R.styleable.BottomDrawer_bottom_sheet_corner_radius,
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius)
             ).toFloat()
+
+            shouldDrawUnderStatus = attr.getBoolean(
+                R.styleable.BottomDrawer_should_draw_under_status_bar,
+                false
+            )
+
+            shouldDrawUnderHandle = attr.getBoolean(
+                R.styleable.BottomDrawer_should_draw_content_under_handle_view,
+                false
+            )
+
         } finally {
             attr?.recycle()
         }
@@ -109,15 +120,9 @@ class BottomDrawer : FrameLayout {
         container.addView(child)
     }
 
-    fun addHandleView(
-        view: View,
-        shouldDrawUnderStatusBar: Boolean,
-        shouldDrawContentUnderHandle: Boolean
-    ) {
+    fun addHandleView(view: View) {
         super.addView(view)
         handleView = view
-        shouldDrawUnderStatus = shouldDrawUnderStatusBar
-        shouldDrawUnderHandle = shouldDrawContentUnderHandle
         val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
         val height = marginLayoutParams.height + marginLayoutParams.topMargin
 

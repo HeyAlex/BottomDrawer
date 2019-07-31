@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BottomDrawer">
+        <attr name="should_draw_under_status_bar" format="boolean" />
+        <attr name="should_draw_content_under_handle_view" format="boolean" />
         <attr name="bottom_sheet_corner_radius" format="dimension" />
         <attr name="bottom_drawer_background" format="color" />
         <attr name="bottom_sheet_extra_padding" format="dimension" />

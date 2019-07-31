@@ -22,6 +22,7 @@
 
     <style name="Pull" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">0dp</item>
+        <item name="should_draw_under_status_bar">true</item>
     </style>
 
 </resources>

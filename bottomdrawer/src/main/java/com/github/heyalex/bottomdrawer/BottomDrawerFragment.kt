@@ -39,14 +39,9 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         }
     }
 
-    private fun addHandleView(
-        shouldDrawUnderStatus: Boolean = false,
-        shouldDrawContentUnderHandle: Boolean = false
-    ) {
+    private fun addHandleView() {
         bottomDrawerDialog?.drawer?.addHandleView(
-            getHandleView(),
-            shouldDrawUnderStatus,
-            shouldDrawContentUnderHandle
+            getHandleView()
         )
     }
 
