@@ -137,7 +137,7 @@ class BottomDrawer : FrameLayout {
     }
 
     override fun onDraw(canvas: Canvas) {
-        if (!defaultCorner) {
+        if (!defaultCorner && !rect.isEmpty) {
             cornerRadiusDrawable.bounds = rect
             cornerRadiusDrawable.draw(canvas)
         }
@@ -210,12 +210,20 @@ class BottomDrawer : FrameLayout {
     }
 
     internal fun globalTranslationViews() {
+        if(!defaultCorner && !rect.isEmpty){
+            defaultCorner = true
+            ViewCompat.setBackground(this, defaultBackgroundDrawable)
+        }
+
         if (isEnoughToFullExpand && top < fullHeight - collapseHeight) {
             updateTranslationOnGlobalLayoutChanges()
         } else {
             translationUpdater?.updateTranslation(0f)
+            translateViews(0f)
             if (top == fullHeight - collapseHeight) {
                 defaultCorner = true
+                ViewCompat.setBackground(this, defaultBackgroundDrawable)
+                translateViews(1f)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && isEnoughToFullExpand) {
                 updateTranslationOnGlobalLayoutChanges()
