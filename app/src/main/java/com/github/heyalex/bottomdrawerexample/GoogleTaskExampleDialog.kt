@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
-import com.github.heyalex.bottomdrawer.TranslationUpdater
 import com.github.heyalex.handle.PlainHandleView
 
 class GoogleTaskExampleDialog : BottomDrawerFragment() {
@@ -26,7 +25,12 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         val percent = 0.65f
         addBottomSheetCallback {
             onSlide { _, slideOffset ->
-                alphaCancelButton = (slideOffset - percent) * (1f / (1f - percent))
+                val alphaTemp = (slideOffset - percent) * (1f / (1f - percent))
+                alphaCancelButton = if (alphaTemp >= 0) {
+                    alphaTemp
+                } else {
+                    0f
+                }
                 cancelButton.alpha = alphaCancelButton
                 cancelButton.isEnabled = alphaCancelButton > 0
             }
@@ -57,5 +61,17 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
 
     override fun getStyle(): Int {
         return R.style.Plain
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putFloat("alphaCancelButton", alphaCancelButton)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        alphaCancelButton = savedInstanceState?.getFloat("alphaCancelButton") ?: 0f
+        cancelButton.alpha = alphaCancelButton
+        cancelButton.isEnabled = alphaCancelButton > 0
     }
 }

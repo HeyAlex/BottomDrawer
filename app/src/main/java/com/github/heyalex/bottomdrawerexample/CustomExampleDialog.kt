@@ -58,4 +58,14 @@ class CustomExampleDialog : BottomDrawerFragment() {
     override fun getStyle(): Int {
         return R.style.Pull
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putFloat("alphaCancelButton", alphaCancelButton)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        alphaCancelButton = savedInstanceState?.getFloat("alphaCancelButton") ?: 0f
+    }
 }
