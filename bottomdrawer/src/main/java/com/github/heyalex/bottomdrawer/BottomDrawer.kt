@@ -219,12 +219,16 @@ class BottomDrawer : FrameLayout {
                 0f
             }
             translateViews(1f, translationView.toInt())
+            if (translationView == 0f) {
+                translationUpdater?.updateTranslation(0f)
+            } else if (top == 0) {
+                translationUpdater?.updateTranslation(1f)
+            }
         } else {
+            translationUpdater?.updateTranslation(0f)
             if (top == fullHeight - collapseHeight) {
                 defaultCorner = true
-                translationUpdater?.updateTranslation(0f)
             }
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && isEnoughToFullExpand) {
                 //if view is expanded, we need to make a correct translation depends on change orientation
                 val diff = diffWithStatusBar - top
@@ -234,6 +238,11 @@ class BottomDrawer : FrameLayout {
                     0f
                 }
                 translateViews(1f, translationView.toInt())
+                if (translationView == 0f) {
+                    translationUpdater?.updateTranslation(0f)
+                } else if (top == 0) {
+                    translationUpdater?.updateTranslation(1f)
+                }
             }
         }
     }
