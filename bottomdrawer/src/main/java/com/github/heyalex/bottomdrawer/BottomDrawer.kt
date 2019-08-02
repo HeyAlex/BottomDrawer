@@ -210,16 +210,16 @@ class BottomDrawer : FrameLayout {
     }
 
     internal fun globalTranslationViews() {
-        if(!defaultCorner && !rect.isEmpty){
-            defaultCorner = true
-            ViewCompat.setBackground(this, defaultBackgroundDrawable)
-        }
-
         if (isEnoughToFullExpand && top < fullHeight - collapseHeight) {
             updateTranslationOnGlobalLayoutChanges()
         } else {
+            defaultCorner = false
+            if(!defaultCorner && !rect.isEmpty){
+                ViewCompat.setBackground(this, defaultBackgroundDrawable)
+                translateViews(0f)
+                defaultCorner = true
+            }
             translationUpdater?.updateTranslation(0f)
-            translateViews(0f)
             if (top == fullHeight - collapseHeight) {
                 defaultCorner = true
                 ViewCompat.setBackground(this, defaultBackgroundDrawable)
