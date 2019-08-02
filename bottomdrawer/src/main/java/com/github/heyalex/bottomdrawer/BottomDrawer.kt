@@ -126,7 +126,7 @@ class BottomDrawer : FrameLayout {
         val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
         val height = marginLayoutParams.height + marginLayoutParams.topMargin
 
-        if (!shouldDrawUnderStatus) {
+        if (shouldDrawUnderStatus) {
             calculateDiffStatusBar(height)
         }
         if (!shouldDrawUnderHandle) {
@@ -167,7 +167,7 @@ class BottomDrawer : FrameLayout {
                 invalidate()
             }
             container.translationY = 0f
-            if (shouldDrawUnderStatus) {
+            if (!shouldDrawUnderStatus) {
                 handleView?.translationY = 0f
             }
             translationUpdater?.updateTranslation(0f)
@@ -250,7 +250,7 @@ class BottomDrawer : FrameLayout {
     private fun translateViews(offset: Float, height: Int) {
         translationView = height * offset
         container.translationY = translationView
-        if (shouldDrawUnderStatus) {
+        if (!shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
 
