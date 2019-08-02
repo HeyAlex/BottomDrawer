@@ -17,6 +17,7 @@
         <com.github.heyalex.expandable_cardview.ExpandableCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/expandble_profile"
             android:layout_margin="0dp"
             app:animation_duration="250"
             app:cardCornerRadius="0dp"
@@ -116,68 +117,35 @@
                 android:text="TEST DATA"
                 android:textSize="20sp" />
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:text="TEST DATA"
+                android:textSize="20sp" />
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:text="TEST DATA"
+                android:textSize="20sp" />
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:text="TEST DATA"
+                android:textSize="20sp" />
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:text="TEST DATA"-->
-                <!--android:textSize="20sp" />-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:text="LAST ITEM KEK"
+                android:textSize="20sp" />
 
             <!--<TextView-->
                 <!--android:layout_width="match_parent"-->
