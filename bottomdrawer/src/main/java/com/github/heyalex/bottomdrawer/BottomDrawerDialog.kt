@@ -55,6 +55,8 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                 var flags = it.decorView.systemUiVisibility
                 flags =
                     flags xor View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                flags =
+                    flags xor View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
                 it.decorView.systemUiVisibility = flags
             }
         }
