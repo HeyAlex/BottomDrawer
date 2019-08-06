@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
-import com.github.heyalex.handle.PlainHandleView
 import com.github.heyalex.handle.PullHandleView
 
 class CustomExampleDialog : BottomDrawerFragment() {

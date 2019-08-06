@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
@@ -19,7 +18,7 @@ class BottomDrawer : FrameLayout {
     private var container: FrameLayout
     private val rect: Rect = Rect()
 
-    private var defaultBackgroundDrawable: Drawable? = null
+    private val defaultBackgroundDrawable = GradientDrawable()
     private val cornerRadiusDrawable = GradientDrawable()
     private val cornerArray: FloatArray =
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
@@ -54,6 +53,7 @@ class BottomDrawer : FrameLayout {
         setWillNotDraw(false)
         drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadiusDrawable.setColor(drawerBackground)
+        defaultBackgroundDrawable.setColor(drawerBackground)
 
         calculateDiffStatusBar(0)
 
@@ -92,14 +92,14 @@ class BottomDrawer : FrameLayout {
                 resources.getDimensionPixelSize(R.dimen.default_bottom_sheet_top_container_margin)
             )
 
-            defaultBackgroundDrawable = attr.getDrawable(
-                R.styleable.BottomDrawer_bottom_drawer_background
-            ) ?: ContextCompat.getDrawable(context, R.drawable.bottom_drawer_corner_bg)
-
             cornerRadius = attr.getDimensionPixelSize(
                 R.styleable.BottomDrawer_bottom_sheet_corner_radius,
                 resources.getDimensionPixelSize(R.dimen.bottom_sheet_corner_radius)
             ).toFloat()
+
+            val cornerArray: FloatArray =
+                floatArrayOf(cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0.0f, 0.0f, 0.0f, 0.0f)
+            defaultBackgroundDrawable.cornerRadii = cornerArray
 
             shouldDrawUnderStatus = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_under_status_bar,
@@ -139,6 +139,7 @@ class BottomDrawer : FrameLayout {
     override fun onDraw(canvas: Canvas) {
         if (!defaultCorner && !rect.isEmpty) {
             cornerRadiusDrawable.bounds = rect
+            defaultBackgroundDrawable.bounds = rect
             cornerRadiusDrawable.draw(canvas)
         }
     }
