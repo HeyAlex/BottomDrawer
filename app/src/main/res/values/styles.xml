@@ -23,6 +23,7 @@
 
     <style name="Pull" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">0dp</item>
+        <item name="bottom_sheet_corner_radius">26dp</item>
     </style>
 
 </resources>
