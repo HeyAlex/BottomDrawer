@@ -121,19 +121,21 @@ class BottomDrawer : FrameLayout {
     }
 
     fun addHandleView(view: View) {
-        super.addView(view)
-        handleView = view
-        val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
-        val height = marginLayoutParams.height + marginLayoutParams.topMargin
+        if (handleView == null) {
+            super.addView(view)
+            handleView = view
+            val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
+            val height = marginLayoutParams.height + marginLayoutParams.topMargin
 
-        if (shouldDrawUnderStatus) {
-            calculateDiffStatusBar(height)
-        }
-        if (!shouldDrawUnderHandle) {
-            container.setMarginExtensionFunction(0, height, 0, 0)
-        }
+            if (shouldDrawUnderStatus) {
+                calculateDiffStatusBar(height)
+            }
+            if (!shouldDrawUnderHandle) {
+                container.setMarginExtensionFunction(0, height, 0, 0)
+            }
 
-        translationUpdater = view as TranslationUpdater
+            translationUpdater = view as TranslationUpdater
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
