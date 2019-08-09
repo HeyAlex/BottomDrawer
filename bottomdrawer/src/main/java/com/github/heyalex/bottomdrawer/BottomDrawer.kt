@@ -243,7 +243,7 @@ class BottomDrawer : FrameLayout {
             0f
         }
         translateViews(1f, translationView.toInt())
-        if (translationView == 0f) {
+        if (translationView == 0f && Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             translationUpdater?.updateTranslation(0f)
         } else if (top == 0) {
             translationUpdater?.updateTranslation(1f)

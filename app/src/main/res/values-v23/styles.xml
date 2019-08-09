@@ -8,6 +8,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">#80FFFFFF</item>
+        <item name="android:statusBarColor">#80FFFFFF</item>
     </style>
 
     <style name="Plain" parent="BottomDialogTheme">

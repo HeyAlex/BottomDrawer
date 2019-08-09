@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:navigationBarColor">#80FFFFFF</item>
+        <item name="android:navigationBarColor">#29000000</item>
+        <item name="android:statusBarColor">#29000000</item>
     </style>
 </resources>
