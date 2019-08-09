@@ -14,6 +14,8 @@
     <style name="Plain" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">14dp</item>
         <item name="should_draw_under_status_bar">true</item>
+        <item name="android:navigationBarColor">#294BFF00</item>
+        <item name="android:statusBarColor">#294BFF00</item>
     </style>
 
 </resources>

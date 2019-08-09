@@ -9,4 +9,12 @@
         <item name="android:navigationBarColor">#29000000</item>
         <item name="android:statusBarColor">#29000000</item>
     </style>
+
+    <style name="Plain" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">0dp</item>
+        <item name="should_draw_under_status_bar">false</item>
+        <item name="android:navigationBarColor">#29F80000</item>
+        <item name="android:statusBarColor">#29FF0000</item>
+    </style>
+
 </resources>
