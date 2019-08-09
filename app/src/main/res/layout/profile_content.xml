@@ -19,8 +19,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="18dp"
             android:src="@drawable/ic_person_add_black_24dp" />
 
         <TextView
@@ -39,8 +39,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="18dp"
             android:src="@drawable/ic_settings_black_24dp" />
 
         <TextView
