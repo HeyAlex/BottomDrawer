@@ -8,6 +8,11 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">#80FFFFFF</item>
-
     </style>
+
+    <style name="Plain" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">14dp</item>
+        <item name="should_draw_under_status_bar">true</item>
+    </style>
+
 </resources>

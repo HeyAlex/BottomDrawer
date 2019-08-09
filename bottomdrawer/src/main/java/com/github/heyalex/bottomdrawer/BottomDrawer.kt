@@ -57,7 +57,10 @@ class BottomDrawer : FrameLayout {
 
         calculateDiffStatusBar(0)
 
-        val heightPixels = context.resources.displayMetrics.heightPixels
+        var heightPixels = context.resources.displayMetrics.heightPixels
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            heightPixels -= getStatusBarHeight(context)
+        }
         fullHeight = heightPixels
         collapseHeight = heightPixels / 2
 
