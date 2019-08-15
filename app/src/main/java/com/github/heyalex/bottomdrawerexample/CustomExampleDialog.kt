@@ -22,10 +22,9 @@ class CustomExampleDialog : BottomDrawerFragment() {
     ): View {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         cancelButton = view.findViewById(R.id.cancel)
-        val percent = 0.65f
         addBottomSheetCallback {
             onSlide { _, slideOffset ->
-                alphaCancelButton = (slideOffset - percent) * (1f / (1f - percent))
+                alphaCancelButton = (slideOffset - PERCENT) * (1f / (1f - PERCENT))
                 cancelButton.alpha = alphaCancelButton
                 cancelButton.isEnabled = alphaCancelButton > 0
             }
@@ -66,5 +65,9 @@ class CustomExampleDialog : BottomDrawerFragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         alphaCancelButton = savedInstanceState?.getFloat("alphaCancelButton") ?: 0f
+    }
+
+    companion object {
+        const val PERCENT = 0.65f
     }
 }

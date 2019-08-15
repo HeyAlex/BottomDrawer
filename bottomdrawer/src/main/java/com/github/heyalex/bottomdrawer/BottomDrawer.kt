@@ -73,7 +73,6 @@ class BottomDrawer : FrameLayout {
 
             params.topMargin = defaultContainerMargin
 
-
             layoutParams = params
         }
         super.addView(container)
