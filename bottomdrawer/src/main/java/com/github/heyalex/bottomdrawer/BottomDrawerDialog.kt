@@ -252,8 +252,8 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
     class Builder(
         val context: Context
     ) {
-        var theme: Int? = null
+        var theme: Int = R.style.BottomDialogTheme
 
-        fun build() = BottomDrawerDialog(context)
+        fun build() = BottomDrawerDialog(context, theme)
     }
 }
