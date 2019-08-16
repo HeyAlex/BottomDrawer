@@ -259,7 +259,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         var isCancelableOnTouchOutside: Boolean = true
 
         fun build() = BottomDrawerDialog(context, theme).apply {
-            this.isCancelableOnTouchOutside = isCancelableOnTouchOutside
+            this.isCancelableOnTouchOutside = this@Builder.isCancelableOnTouchOutside
         }
     }
 }
