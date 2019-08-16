@@ -32,6 +32,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         CopyOnWriteArrayList()
 
     private var offset = 0f
+    private var isCancelableOnTouchOutside = true
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -144,7 +145,9 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
         coordinator.findViewById<View>(R.id.touch_outside)
             .setOnClickListener {
-                behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                if (isCancelableOnTouchOutside) {
+                    behavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                }
             }
 
         // Handle accessibility events
@@ -253,7 +256,10 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         val context: Context
     ) {
         var theme: Int = R.style.BottomDialogTheme
+        var isCancelableOnTouchOutside: Boolean = true
 
-        fun build() = BottomDrawerDialog(context, theme)
+        fun build() = BottomDrawerDialog(context, theme).apply {
+            this.isCancelableOnTouchOutside = isCancelableOnTouchOutside
+        }
     }
 }
