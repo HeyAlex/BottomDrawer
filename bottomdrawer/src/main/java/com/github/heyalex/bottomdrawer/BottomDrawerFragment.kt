@@ -23,9 +23,11 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return BottomDrawerDialog.build(context!!) {
+        val dialog = BottomDrawerDialog.build(context!!) {
             theme = getStyle()
         }
+        bottomDrawerDialog = dialog
+        return dialog
     }
 
     override fun onStart() {
