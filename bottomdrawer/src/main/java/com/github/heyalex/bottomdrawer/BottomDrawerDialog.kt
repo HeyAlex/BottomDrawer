@@ -13,7 +13,6 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialog
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.AccessibilityDelegateCompat
@@ -41,8 +40,6 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window?.let {
-            AlertDialog.Builder(context).create()
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             }
