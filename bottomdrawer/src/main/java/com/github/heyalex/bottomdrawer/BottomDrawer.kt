@@ -24,15 +24,15 @@ class BottomDrawer : FrameLayout {
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float = 0f
-    private var extraPadding: Int = 0
+    internal var extraPadding: Int = 0
     private var defaultContainerMargin: Int = 0
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
     private var translationView: Float = 0f
 
-    private var shouldDrawUnderStatus = false
-    private var shouldDrawUnderHandle = false
+    internal var shouldDrawUnderStatus = false
+    internal var shouldDrawUnderHandle = false
 
     private var translationUpdater: TranslationUpdater? = null
     private var handleView: View? = null

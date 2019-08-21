@@ -32,6 +32,8 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     private var offset = 0f
     private var isCancelableOnTouchOutside = true
+    private var shouldDrawUnderStatusBar = false
+    private var shouldDrawUnderHandle = false
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -89,6 +91,11 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             wrappedView = layoutInflater.inflate(layoutResId, coordinator, false)
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
+        drawer.apply {
+            this.shouldDrawUnderStatus = shouldDrawUnderStatusBar
+            this.shouldDrawUnderHandle = shouldDrawUnderHandle
+        }
+
         behavior = BottomSheetBehavior.from(drawer)
         behavior?.state = BottomSheetBehavior.STATE_HIDDEN
         val metrics = context.resources.displayMetrics
@@ -254,9 +261,13 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
     ) {
         var theme: Int = R.style.BottomDialogTheme
         var isCancelableOnTouchOutside: Boolean = true
+        var shouldDrawUnderStatusBar: Boolean = false
+        var shouldDrawUnderHandle: Boolean = false
 
         fun build() = BottomDrawerDialog(context, theme).apply {
             this.isCancelableOnTouchOutside = this@Builder.isCancelableOnTouchOutside
+            this.shouldDrawUnderStatusBar = this@Builder.shouldDrawUnderStatusBar
+            this.shouldDrawUnderHandle = this@Builder.shouldDrawUnderHandle
         }
     }
 }

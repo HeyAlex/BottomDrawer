@@ -10,7 +10,8 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
+abstract class
+BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
 
     private var bottomDrawerDialog: BottomDrawerDialog? = null
 
@@ -27,8 +28,11 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
             theme = getStyle()
         }
         bottomDrawerDialog = dialog
+        onCreateDialogg()
         return dialog
     }
+
+    abstract fun onCreateDialogg() : BottomDrawerDialog
 
     override fun onStart() {
         super.onStart()

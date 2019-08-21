@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.github.heyalex.bottomdrawer.BottomDrawerDialog
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PullHandleView
 
@@ -46,6 +47,12 @@ class CustomExampleDialog : BottomDrawerFragment() {
                 resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_top_margin)
 
             layoutParams = params
+        }
+    }
+
+    override fun onCreateDialogg() : BottomDrawerDialog {
+        return BottomDrawerDialog.build(context!!) {
+            theme = R.style.Pull
         }
     }
 
