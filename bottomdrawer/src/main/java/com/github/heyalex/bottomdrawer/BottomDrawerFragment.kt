@@ -9,18 +9,9 @@ import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-abstract class
-BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
+abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
 
     private var bottomDrawerDialog: BottomDrawerDialog? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(getContainer(), container, false)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return prepareBottomDrawerDialog()
@@ -54,9 +45,6 @@ BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.
     fun getCurrentState(): Int? {
         return bottomDrawerDialog?.behavior?.state
     }
-
-    @LayoutRes
-    abstract fun getContainer(): Int
 
     override fun onGlobalLayout() {
         bottomDrawerDialog?.drawer?.globalTranslationViews()

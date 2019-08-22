@@ -21,7 +21,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
+        val view = inflater.inflate(R.layout.google_task_example_layout, container, false)
         cancelButton = view.findViewById(R.id.cancel)
         val percent = 0.65f
         addBottomSheetCallback {
@@ -60,10 +60,6 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Plain
         }
-    }
-
-    override fun getContainer(): Int {
-        return R.layout.google_task_example_layout
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

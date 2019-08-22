@@ -21,7 +21,7 @@ class CustomExampleDialog : BottomDrawerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
+        val view = inflater.inflate(R.layout.google_task_example_layout, container, false)
         cancelButton = view.findViewById(R.id.cancel)
         addBottomSheetCallback {
             onSlide { _, slideOffset ->
@@ -50,14 +50,10 @@ class CustomExampleDialog : BottomDrawerFragment() {
         }
     }
 
-    override fun prepareBottomDrawerDialog() : BottomDrawerDialog {
+    override fun prepareBottomDrawerDialog(): BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Pull
         }
-    }
-
-    override fun getContainer(): Int {
-        return R.layout.google_task_example_layout
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
