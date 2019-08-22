@@ -50,7 +50,7 @@ class CustomExampleDialog : BottomDrawerFragment() {
         }
     }
 
-    override fun onCreateDialogg() : BottomDrawerDialog {
+    override fun prepareBottomDrawerDialog() : BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Pull
         }
@@ -58,10 +58,6 @@ class CustomExampleDialog : BottomDrawerFragment() {
 
     override fun getContainer(): Int {
         return R.layout.google_task_example_layout
-    }
-
-    override fun getStyle(): Int {
-        return R.style.Pull
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

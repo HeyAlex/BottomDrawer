@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
-import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 abstract class
@@ -24,15 +23,10 @@ BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomDrawerDialog.build(context!!) {
-            theme = getStyle()
-        }
-        bottomDrawerDialog = dialog
-        onCreateDialogg()
-        return dialog
+        return prepareBottomDrawerDialog()
     }
 
-    abstract fun onCreateDialogg() : BottomDrawerDialog
+    abstract fun prepareBottomDrawerDialog() : BottomDrawerDialog
 
     override fun onStart() {
         super.onStart()
@@ -63,11 +57,6 @@ BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.
 
     @LayoutRes
     abstract fun getContainer(): Int
-
-    @StyleRes
-    open fun getStyle(): Int {
-        return R.style.BottomDialogTheme
-    }
 
     override fun onGlobalLayout() {
         bottomDrawerDialog?.drawer?.globalTranslationViews()

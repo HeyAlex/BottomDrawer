@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.github.heyalex.bottomdrawer.BottomDrawerDialog
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PlainHandleView
 
@@ -55,12 +56,14 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         }
     }
 
-    override fun getContainer(): Int {
-        return R.layout.google_task_example_layout
+    override fun prepareBottomDrawerDialog() : BottomDrawerDialog {
+        return BottomDrawerDialog.build(context!!) {
+            theme = R.style.Plain
+        }
     }
 
-    override fun getStyle(): Int {
-        return R.style.Plain
+    override fun getContainer(): Int {
+        return R.layout.google_task_example_layout
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
