@@ -14,7 +14,9 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     private var bottomDrawerDialog: BottomDrawerDialog? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return prepareBottomDrawerDialog()
+        val dialog = prepareBottomDrawerDialog()
+        bottomDrawerDialog = dialog
+        return dialog
     }
 
     abstract fun prepareBottomDrawerDialog() : BottomDrawerDialog
