@@ -56,8 +56,6 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
 
                 layoutParams = params
             }
-            shouldDrawUnderHandle = false
-            shouldDrawUnderStatusBar = true
         }
     }
 

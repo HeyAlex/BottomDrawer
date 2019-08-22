@@ -258,8 +258,6 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         var theme: Int = R.style.BottomDialogTheme
         var handleView: View? = null
         var isCancelableOnTouchOutside: Boolean? = null
-        var shouldDrawUnderHandle: Boolean = false
-        var shouldDrawUnderStatusBar: Boolean = false
 
         fun build() = BottomDrawerDialog(context, theme).apply {
             whenNotNull(this@Builder.isCancelableOnTouchOutside) {
