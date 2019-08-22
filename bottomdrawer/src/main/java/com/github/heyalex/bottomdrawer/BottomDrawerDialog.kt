@@ -24,7 +24,6 @@ import java.util.concurrent.CopyOnWriteArrayList
 open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
     AppCompatDialog(context, theme) {
 
-    private lateinit var bottomDrawerParams: BottomDrawerParams
     internal var behavior: BottomSheetBehavior<BottomDrawer>? = null
     internal lateinit var drawer: BottomDrawer
     private lateinit var coordinator: CoordinatorLayout
@@ -33,6 +32,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     private var offset = 0f
     private var isCancelableOnTouchOutside = true
+    private var handleView: View? = null
 
 
     init {
@@ -91,7 +91,6 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             wrappedView = layoutInflater.inflate(layoutResId, coordinator, false)
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
-        drawer.changeParams(bottomDrawerParams)
         behavior = BottomSheetBehavior.from(drawer)
         behavior?.state = BottomSheetBehavior.STATE_HIDDEN
         val metrics = context.resources.displayMetrics
@@ -103,6 +102,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         } else {
             drawer.addView(wrappedView, params)
         }
+        drawer.addHandleView(handleView)
 
         coordinator.background.alpha = offset.toInt()
 
@@ -266,8 +266,9 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
                 this.isCancelableOnTouchOutside = it
             }
 
-            bottomDrawerParams =
-                BottomDrawerParams(handleView, shouldDrawUnderStatusBar, shouldDrawUnderHandle)
+            whenNotNull(this@Builder.handleView) {
+                this.handleView = it
+            }
         }
 
         private inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {

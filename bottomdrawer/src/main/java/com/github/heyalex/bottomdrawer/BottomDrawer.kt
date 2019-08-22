@@ -15,8 +15,6 @@ import androidx.core.view.ViewCompat
 
 class BottomDrawer : FrameLayout {
 
-    private var params: BottomDrawerParams = BottomDrawerParams()
-
     private var container: FrameLayout
     private val rect: Rect = Rect()
 
@@ -41,6 +39,10 @@ class BottomDrawer : FrameLayout {
 
     private val fullHeight: Int
     private val collapseHeight: Int
+
+    //TODO make params
+    private var shouldDrawUnderStatus: Boolean = false
+    private var shouldDrawUnderHandle: Boolean = false
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -99,15 +101,24 @@ class BottomDrawer : FrameLayout {
             ).toFloat()
 
             val cornerArray: FloatArray =
-                floatArrayOf(cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0.0f, 0.0f, 0.0f, 0.0f)
+                floatArrayOf(
+                    cornerRadius,
+                    cornerRadius,
+                    cornerRadius,
+                    cornerRadius,
+                    0.0f,
+                    0.0f,
+                    0.0f,
+                    0.0f
+                )
             defaultBackgroundDrawable.cornerRadii = cornerArray
 
-            params.shouldDrawUnderStatus = attr.getBoolean(
+            shouldDrawUnderStatus = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_under_status_bar,
                 false
             )
 
-            params.shouldDrawUnderHandle = attr.getBoolean(
+            shouldDrawUnderHandle = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_content_under_handle_view,
                 false
             )
@@ -153,7 +164,7 @@ class BottomDrawer : FrameLayout {
                 invalidate()
             }
             container.translationY = 0f
-            if (!params.shouldDrawUnderStatus) {
+            if (!shouldDrawUnderStatus) {
                 handleView?.translationY = 0f
             }
             translationUpdater?.updateTranslation(0f)
@@ -233,7 +244,7 @@ class BottomDrawer : FrameLayout {
     private fun translateViews(offset: Float, height: Int) {
         translationView = height * offset
         container.translationY = translationView
-        if (!params.shouldDrawUnderStatus) {
+        if (!shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
 
@@ -255,19 +266,19 @@ class BottomDrawer : FrameLayout {
         diffWithStatusBar += extraPadding
     }
 
-    internal fun changeParams(newParams: BottomDrawerParams) {
-        params = newParams
-        params.handleView?.let { view ->
+    internal fun addHandleView(newHandleView: View?) {
+        handleView = newHandleView
+        handleView?.let { view ->
             super.addView(view)
             handleView = view
             val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
             val height = marginLayoutParams.height + marginLayoutParams.topMargin
 
 
-            if (params.shouldDrawUnderStatus) {
+            if (shouldDrawUnderStatus) {
                 calculateDiffStatusBar(height)
             }
-            if (!params.shouldDrawUnderHandle) {
+            if (!shouldDrawUnderHandle) {
                 container.setMarginExtensionFunction(0, height, 0, 0)
             }
 
