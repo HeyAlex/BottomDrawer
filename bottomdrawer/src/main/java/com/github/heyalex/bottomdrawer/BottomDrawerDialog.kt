@@ -32,8 +32,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
 
     private var offset = 0f
     private var isCancelableOnTouchOutside = true
-    private var shouldDrawUnderStatusBar = false
-    private var shouldDrawUnderHandle = false
+
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -91,10 +90,6 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             wrappedView = layoutInflater.inflate(layoutResId, coordinator, false)
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
-        drawer.apply {
-            this.shouldDrawUnderStatus = shouldDrawUnderStatusBar
-            this.shouldDrawUnderHandle = shouldDrawUnderHandle
-        }
 
         behavior = BottomSheetBehavior.from(drawer)
         behavior?.state = BottomSheetBehavior.STATE_HIDDEN
@@ -261,14 +256,30 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
     ) {
         var theme: Int = R.style.BottomDialogTheme
         var handleView: View? = null
-        var isCancelableOnTouchOutside: Boolean = true
-        var shouldDrawUnderStatusBar: Boolean = false
-        var shouldDrawUnderHandle: Boolean = false
+        var isCancelableOnTouchOutside: Boolean? = null
+        var shouldDrawUnderStatusBar: Boolean? = null
+        var shouldDrawUnderHandle: Boolean? = null
 
         fun build() = BottomDrawerDialog(context, theme).apply {
-            this.isCancelableOnTouchOutside = this@Builder.isCancelableOnTouchOutside
-            this.shouldDrawUnderStatusBar = this@Builder.shouldDrawUnderStatusBar
-            this.shouldDrawUnderHandle = this@Builder.shouldDrawUnderHandle
+            whenNotNull(this@Builder.isCancelableOnTouchOutside) {
+                this.isCancelableOnTouchOutside = it
+            }
+
+            whenNotNull(this@Builder.shouldDrawUnderStatusBar) {
+                drawer.apply {
+                    this.shouldDrawUnderStatus = it
+                }
+            }
+
+            whenNotNull(this@Builder.shouldDrawUnderHandle) {
+                drawer.apply {
+                    this.shouldDrawUnderHandle = it
+                }
+            }
+        }
+
+        inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
+            return input?.let(callback)
         }
     }
 }
