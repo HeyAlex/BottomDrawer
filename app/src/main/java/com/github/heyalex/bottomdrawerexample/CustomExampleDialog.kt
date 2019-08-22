@@ -34,25 +34,22 @@ class CustomExampleDialog : BottomDrawerFragment() {
         return view
     }
 
-    override fun getHandleView(): View {
-        return PullHandleView(context!!).apply {
-            val widthHandle =
-                resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_width)
-            val heightHandle =
-                resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_height)
-            val params =
-                FrameLayout.LayoutParams(widthHandle, heightHandle, Gravity.CENTER_HORIZONTAL)
-
-            params.topMargin =
-                resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_top_margin)
-
-            layoutParams = params
-        }
-    }
-
     override fun prepareBottomDrawerDialog(): BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Pull
+            handleView = PullHandleView(context).apply {
+                val widthHandle =
+                    resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_width)
+                val heightHandle =
+                    resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_height)
+                val params =
+                    FrameLayout.LayoutParams(widthHandle, heightHandle, Gravity.CENTER_HORIZONTAL)
+
+                params.topMargin =
+                    resources.getDimensionPixelSize(R.dimen.sample_bottom_sheet_handle_top_margin)
+
+                layoutParams = params
+            }
         }
     }
 

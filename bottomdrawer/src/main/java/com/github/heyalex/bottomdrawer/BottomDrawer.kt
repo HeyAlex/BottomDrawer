@@ -15,6 +15,8 @@ import androidx.core.view.ViewCompat
 
 class BottomDrawer : FrameLayout {
 
+    private var params: BottomDrawerParams = BottomDrawerParams()
+
     private var container: FrameLayout
     private val rect: Rect = Rect()
 
@@ -30,9 +32,6 @@ class BottomDrawer : FrameLayout {
     private var defaultCorner = false
     private var diffWithStatusBar: Int = 0
     private var translationView: Float = 0f
-
-    internal var shouldDrawUnderStatus = false
-    internal var shouldDrawUnderHandle = false
 
     private var translationUpdater: TranslationUpdater? = null
     private var handleView: View? = null
@@ -103,12 +102,12 @@ class BottomDrawer : FrameLayout {
                 floatArrayOf(cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0.0f, 0.0f, 0.0f, 0.0f)
             defaultBackgroundDrawable.cornerRadii = cornerArray
 
-            shouldDrawUnderStatus = attr.getBoolean(
+            params.shouldDrawUnderStatus = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_under_status_bar,
                 false
             )
 
-            shouldDrawUnderHandle = attr.getBoolean(
+            params.shouldDrawUnderHandle = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_content_under_handle_view,
                 false
             )
@@ -120,24 +119,6 @@ class BottomDrawer : FrameLayout {
 
     override fun addView(child: View?) {
         container.addView(child)
-    }
-
-    fun addHandleView(view: View) {
-        if (handleView == null) {
-            super.addView(view)
-            handleView = view
-            val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
-            val height = marginLayoutParams.height + marginLayoutParams.topMargin
-
-            if (shouldDrawUnderStatus) {
-                calculateDiffStatusBar(height)
-            }
-            if (!shouldDrawUnderHandle) {
-                container.setMarginExtensionFunction(0, height, 0, 0)
-            }
-
-            translationUpdater = view as TranslationUpdater
-        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -172,7 +153,7 @@ class BottomDrawer : FrameLayout {
                 invalidate()
             }
             container.translationY = 0f
-            if (!shouldDrawUnderStatus) {
+            if (!params.shouldDrawUnderStatus) {
                 handleView?.translationY = 0f
             }
             translationUpdater?.updateTranslation(0f)
@@ -252,7 +233,7 @@ class BottomDrawer : FrameLayout {
     private fun translateViews(offset: Float, height: Int) {
         translationView = height * offset
         container.translationY = translationView
-        if (!shouldDrawUnderStatus) {
+        if (!params.shouldDrawUnderStatus) {
             handleView?.translationY = translationView
         }
 
@@ -272,6 +253,26 @@ class BottomDrawer : FrameLayout {
             }
 
         diffWithStatusBar += extraPadding
+    }
+
+    internal fun changeParams(newParams: BottomDrawerParams) {
+        params = newParams
+        params.handleView?.let { view ->
+            super.addView(view)
+            handleView = view
+            val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
+            val height = marginLayoutParams.height + marginLayoutParams.topMargin
+
+
+            if (params.shouldDrawUnderStatus) {
+                calculateDiffStatusBar(height)
+            }
+            if (!params.shouldDrawUnderHandle) {
+                container.setMarginExtensionFunction(0, height, 0, 0)
+            }
+
+            translationUpdater = view as TranslationUpdater
+        }
     }
 
     private fun getStatusBarHeight(context: Context): Int {

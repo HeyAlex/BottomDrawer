@@ -24,6 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
     AppCompatDialog(context, theme) {
 
+    private lateinit var bottomDrawerParams: BottomDrawerParams
     internal var behavior: BottomSheetBehavior<BottomDrawer>? = null
     internal lateinit var drawer: BottomDrawer
     private lateinit var coordinator: CoordinatorLayout
@@ -90,7 +91,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             wrappedView = layoutInflater.inflate(layoutResId, coordinator, false)
         }
         drawer = coordinator.findViewById<View>(R.id.bottom_sheet_drawer) as BottomDrawer
-
+        drawer.changeParams(bottomDrawerParams)
         behavior = BottomSheetBehavior.from(drawer)
         behavior?.state = BottomSheetBehavior.STATE_HIDDEN
         val metrics = context.resources.displayMetrics
@@ -257,25 +258,16 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         var theme: Int = R.style.BottomDialogTheme
         var handleView: View? = null
         var isCancelableOnTouchOutside: Boolean? = null
-        var shouldDrawUnderStatusBar: Boolean? = null
-        var shouldDrawUnderHandle: Boolean? = null
+        var shouldDrawUnderHandle: Boolean = false
+        var shouldDrawUnderStatusBar: Boolean = false
 
         fun build() = BottomDrawerDialog(context, theme).apply {
             whenNotNull(this@Builder.isCancelableOnTouchOutside) {
                 this.isCancelableOnTouchOutside = it
             }
 
-            whenNotNull(this@Builder.shouldDrawUnderStatusBar) {
-                drawer.shouldDrawUnderStatus = it
-            }
-
-            whenNotNull(this@Builder.shouldDrawUnderHandle) {
-                drawer.shouldDrawUnderHandle = it
-            }
-
-            whenNotNull(this@Builder.handleView) {
-                drawer.addHandleView(it)
-            }
+            bottomDrawerParams =
+                BottomDrawerParams(handleView, shouldDrawUnderStatusBar, shouldDrawUnderHandle)
         }
 
         private inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
