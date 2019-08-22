@@ -266,19 +266,19 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
             }
 
             whenNotNull(this@Builder.shouldDrawUnderStatusBar) {
-                drawer.apply {
-                    this.shouldDrawUnderStatus = it
-                }
+                drawer.shouldDrawUnderStatus = it
             }
 
             whenNotNull(this@Builder.shouldDrawUnderHandle) {
-                drawer.apply {
-                    this.shouldDrawUnderHandle = it
-                }
+                drawer.shouldDrawUnderHandle = it
+            }
+
+            whenNotNull(this@Builder.handleView) {
+                drawer.addHandleView(it)
             }
         }
 
-        inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
+        private inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
             return input?.let(callback)
         }
     }
