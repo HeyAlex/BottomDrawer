@@ -9,6 +9,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -24,7 +25,7 @@ class BottomDrawer : FrameLayout {
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
     private var drawerBackground: Int
     private var cornerRadius: Float = 0f
-    internal var extraPadding: Int = 0
+    private var extraPadding: Int = 0
     private var defaultContainerMargin: Int = 0
     private var currentCornerRadius: Float = 0f
     private var defaultCorner = false
@@ -37,8 +38,9 @@ class BottomDrawer : FrameLayout {
     private var isEnoughToFullExpand: Boolean = false
     private var isEnoughToCollapseExpand: Boolean = false
 
-    private val fullHeight: Int
-    private val collapseHeight: Int
+    private var heightPixels: Int
+    private var fullHeight: Int
+    private var collapseHeight: Int
 
     //TODO make params
     private var shouldDrawUnderStatus: Boolean = false
@@ -58,10 +60,7 @@ class BottomDrawer : FrameLayout {
 
         calculateDiffStatusBar(0)
 
-        var heightPixels = context.resources.displayMetrics.heightPixels
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            heightPixels -= getStatusBarHeight(context)
-        }
+        heightPixels = context.resources.displayMetrics.heightPixels
         fullHeight = heightPixels
         collapseHeight = heightPixels / 2
 
@@ -254,13 +253,11 @@ class BottomDrawer : FrameLayout {
         }
     }
 
-    private fun calculateDiffStatusBar(handleViewTopMargin: Int) {
-        val statusBarHeight = getStatusBarHeight(context)
+    private fun calculateDiffStatusBar(topInset: Int) {
         diffWithStatusBar =
             when {
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.M -> 0
-                handleViewTopMargin < statusBarHeight -> (statusBarHeight - handleViewTopMargin)
-                else -> 0
+                else -> topInset
             }
 
         diffWithStatusBar += extraPadding
@@ -274,10 +271,6 @@ class BottomDrawer : FrameLayout {
             val marginLayoutParams = handleView?.layoutParams as MarginLayoutParams
             val height = marginLayoutParams.height + marginLayoutParams.topMargin
 
-
-            if (shouldDrawUnderStatus) {
-                calculateDiffStatusBar(height)
-            }
             if (!shouldDrawUnderHandle) {
                 container.setMarginExtensionFunction(0, height, 0, 0)
             }
@@ -286,13 +279,19 @@ class BottomDrawer : FrameLayout {
         }
     }
 
-    private fun getStatusBarHeight(context: Context): Int {
-        var height = 0
-        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            height = context.resources.getDimensionPixelSize(resourceId)
+    override fun onApplyWindowInsets(insets: WindowInsets): WindowInsets {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            heightPixels = context.resources.displayMetrics.heightPixels
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                heightPixels -= insets.systemWindowInsetTop
+            }
+
+            fullHeight = heightPixels
+            collapseHeight = heightPixels / 2
+
+            calculateDiffStatusBar(insets.systemWindowInsetTop)
         }
-        return height
+        return super.onApplyWindowInsets(insets)
     }
 
     private fun View.setMarginExtensionFunction(left: Int, top: Int, right: Int, bottom: Int) {
