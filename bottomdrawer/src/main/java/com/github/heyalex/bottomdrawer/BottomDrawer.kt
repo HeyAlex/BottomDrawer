@@ -23,7 +23,7 @@ class BottomDrawer : FrameLayout {
     private val cornerRadiusDrawable = GradientDrawable()
     private val cornerArray: FloatArray =
         floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
-    private var drawerBackground: Int
+    private var drawerBackground: Int = 0
     private var cornerRadius: Float = 0f
     private var extraPadding: Int = 0
     private var defaultContainerMargin: Int = 0
@@ -54,7 +54,6 @@ class BottomDrawer : FrameLayout {
 
         initAttributes(context, attrs)
         setWillNotDraw(false)
-        drawerBackground = ContextCompat.getColor(context, R.color.bottom_drawer_background)
         cornerRadiusDrawable.setColor(drawerBackground)
         defaultBackgroundDrawable.setColor(drawerBackground)
 
@@ -120,6 +119,11 @@ class BottomDrawer : FrameLayout {
             shouldDrawUnderHandle = attr.getBoolean(
                 R.styleable.BottomDrawer_should_draw_content_under_handle_view,
                 false
+            )
+
+            drawerBackground = attr.getColor(
+                R.styleable.BottomDrawer_bottom_drawer_background,
+                ContextCompat.getColor(context, R.color.bottom_drawer_background)
             )
 
         } finally {

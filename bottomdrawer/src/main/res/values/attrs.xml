@@ -6,6 +6,7 @@
         <attr name="bottom_sheet_corner_radius" format="dimension" />
         <attr name="bottom_sheet_extra_padding" format="dimension" />
         <attr name="default_bottom_sheet_top_container_margin" format="dimension" />
+        <attr name="bottom_drawer_background" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="BottomDrawerDialog">
