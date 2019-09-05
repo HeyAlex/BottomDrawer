@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:orientation="vertical">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="16dp"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp">
-
-        <com.github.heyalex.expandable_cardview.ExpandableCardView
-            android:id="@+id/expandble_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            app:animation_duration="250"
-            app:cardCornerRadius="0dp"
-            app:content_view="@layout/profile_content"
-            app:expanded="false"
-            app:header_view="@layout/profile_header"
-            tools:expanded="true" />
-    </FrameLayout>
-
-    <View style="@style/Divider.Horizontal" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -40,6 +15,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/corner_radius_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/status_bar_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Light Status Bar" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/navigation_bar_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="Navigation Bar" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/should_draw_under_status_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Light Status Bar" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/should_draw_under_handle_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="Navigation Bar" />
+
 
             <TextView
                 android:layout_width="match_parent"

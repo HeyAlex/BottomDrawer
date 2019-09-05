@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         show_button_sample.setOnClickListener {
-            supportFragmentManager?.beginTransaction()?.add(CustomExampleDialog(), "test1")
+            supportFragmentManager?.beginTransaction()?.add(ExampleDialog(), "test1")
                 ?.commit()
         }
     }
