@@ -50,4 +50,24 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     fun removeBottomSheetCallback(callback: BottomSheetBehavior.BottomSheetCallback) {
         bottomDrawerDialog?.removeBottomSheetCallback(callback)
     }
+
+    fun changeCornerRadius(radius: Float) {
+        bottomDrawerDialog?.drawer?.changeCornerRadius(radius)
+    }
+
+    fun changeBackgroundColor(color: Int) {
+        bottomDrawerDialog?.drawer?.changeBackgroundColor(color)
+    }
+
+    fun changeExtraPadding(extraPadding: Int) {
+        bottomDrawerDialog?.drawer?.changeExtraPadding(extraPadding)
+    }
+
+    fun changeStatusBarIconColor(isLight: Boolean) {
+        bottomDrawerDialog?.changeStatusBarIconColor(isLight)
+    }
+
+    fun changeNavigationIconColor(isLight: Boolean) {
+        bottomDrawerDialog?.changeNavigationIconColor(isLight)
+    }
 }

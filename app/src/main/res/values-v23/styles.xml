@@ -22,7 +22,6 @@
         <item name="bottom_sheet_extra_padding">0dp</item>
         <item name="bottom_sheet_corner_radius">26dp</item>
         <item name="bottom_drawer_background">@color/colorAccent</item>
-
     </style>
 
 </resources>

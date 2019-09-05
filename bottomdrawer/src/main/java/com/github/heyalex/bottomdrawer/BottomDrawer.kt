@@ -304,6 +304,44 @@ class BottomDrawer : FrameLayout {
         layoutParams = params
     }
 
+    fun changeCornerRadius(radius: Float) {
+        onSlide(1f)
+        cornerRadius = radius
+        val cornerArray: FloatArray =
+            floatArrayOf(
+                cornerRadius,
+                cornerRadius,
+                cornerRadius,
+                cornerRadius,
+                0.0f,
+                0.0f,
+                0.0f,
+                0.0f
+            )
+        defaultBackgroundDrawable.cornerRadii = cornerArray
+        invalidate()
+    }
+
+    fun changeBackgroundColor(color: Int) {
+        drawerBackground = color
+        invalidate()
+    }
+
+    fun changeExtraPadding(extraPadding: Int) {
+        this.extraPadding = extraPadding
+        invalidate()
+    }
+
+    fun shouldDrawUnderStatusBar(shouldDrawerUnderStatus: Boolean) {
+        shouldDrawUnderStatus = shouldDrawerUnderStatus
+        invalidate()
+    }
+
+    fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
+        shouldDrawUnderHandle = shouldDrawUnderHandleView
+        invalidate()
+    }
+
     companion object {
         const val offsetTrigger: Float = 0.75f
     }

@@ -23,7 +23,7 @@
         <item name="android:navigationBarColor">#29F80000</item>
         <item name="android:statusBarColor">#29FF0000</item>
         <item name="bottom_drawer_background">@color/colorAccent</item>
-
+        <item name="should_draw_content_under_handle_view">true</item>
     </style>
 
 </resources>
