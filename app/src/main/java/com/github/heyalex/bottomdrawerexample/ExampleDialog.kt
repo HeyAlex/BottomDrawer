@@ -40,6 +40,14 @@ class ExampleDialog : BottomDrawerFragment() {
 
         })
 
+        navigation = view.findViewById(R.id.navigation_bar_accent)
+        navigation.setOnCheckedChangeListener { buttonView, isChecked ->
+            changeNavigationIconColor(isChecked)
+        }
+        statusBar = view.findViewById(R.id.status_bar_accent)
+        statusBar.setOnCheckedChangeListener { buttonView, isChecked ->
+            changeStatusBarIconColor(isChecked)
+        }
         return view
     }
 
