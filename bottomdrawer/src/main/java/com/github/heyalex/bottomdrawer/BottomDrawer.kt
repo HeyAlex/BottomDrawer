@@ -332,13 +332,13 @@ class BottomDrawer : FrameLayout {
         invalidate()
     }
 
-    fun shouldDrawUnderStatusBar(shouldDrawerUnderStatus: Boolean) {
-        shouldDrawUnderStatus = shouldDrawerUnderStatus
+    fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
+        shouldDrawUnderStatus = shouldDrawUnderHandleView
         invalidate()
     }
 
-    fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
-        shouldDrawUnderHandle = shouldDrawUnderHandleView
+    fun shouldDrawUnderStatusBar(shouldDrawerUnderStatus: Boolean) {
+        shouldDrawUnderStatus = shouldDrawerUnderStatus
         invalidate()
     }
 
