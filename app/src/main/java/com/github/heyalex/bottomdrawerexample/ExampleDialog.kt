@@ -15,6 +15,7 @@ import com.github.heyalex.handle.PlainHandleView
 
 class ExampleDialog : BottomDrawerFragment() {
     private lateinit var cornerRadiusSeekBar: AppCompatSeekBar
+    private lateinit var extraPaddingSeekBar: AppCompatSeekBar
 
     private lateinit var navigation: AppCompatCheckBox
     private lateinit var statusBar: AppCompatCheckBox
@@ -33,6 +34,21 @@ class ExampleDialog : BottomDrawerFragment() {
         cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 changeCornerRadius(progress.toFloat())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+
+        extraPaddingSeekBar = view.findViewById(R.id.extra_padding_seek_bar)
+        extraPaddingSeekBar.max = 80
+        extraPaddingSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                changeExtraPadding(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
