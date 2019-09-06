@@ -14,10 +14,13 @@ import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PlainHandleView
 
 class ExampleDialog : BottomDrawerFragment() {
-
     private lateinit var cornerRadiusSeekBar: AppCompatSeekBar
+
     private lateinit var navigation: AppCompatCheckBox
     private lateinit var statusBar: AppCompatCheckBox
+
+    private lateinit var drawUnderHandle: AppCompatCheckBox
+    private lateinit var drawUnderStatus: AppCompatCheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +51,12 @@ class ExampleDialog : BottomDrawerFragment() {
         statusBar.setOnCheckedChangeListener { buttonView, isChecked ->
             changeStatusBarIconColor(isChecked)
         }
+
+        drawUnderStatus = view.findViewById(R.id.should_draw_under_status_bar)
+        drawUnderStatus.setOnCheckedChangeListener { buttonView, isChecked ->
+            shouldDrawUnderStatusBar(isChecked)
+        }
+
         return view
     }
 
