@@ -45,7 +45,7 @@ class ExampleDialog : BottomDrawerFragment() {
         })
 
         extraPaddingSeekBar = view.findViewById(R.id.extra_padding_seek_bar)
-        extraPaddingSeekBar.max = 80
+        extraPaddingSeekBar.max = 180
         extraPaddingSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 changeExtraPadding(progress)
