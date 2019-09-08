@@ -277,6 +277,8 @@ class BottomDrawer : FrameLayout {
 
             if (!shouldDrawUnderHandle) {
                 container.setMarginExtensionFunction(0, height, 0, 0)
+            } else {
+                container.setMarginExtensionFunction(0, 0, 0, 0)
             }
 
             translationUpdater = view as TranslationUpdater
@@ -333,7 +335,9 @@ class BottomDrawer : FrameLayout {
     }
 
     fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
-        shouldDrawUnderStatus = shouldDrawUnderHandleView
+        shouldDrawUnderHandle = shouldDrawUnderHandleView
+        super.removeView(handleView)
+        addHandleView(handleView)
         invalidate()
     }
 

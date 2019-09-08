@@ -74,4 +74,8 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     fun shouldDrawUnderStatusBar(shouldDrawUnderStatusBar: Boolean) {
         bottomDrawerDialog?.drawer?.shouldDrawUnderStatusBar(shouldDrawUnderStatusBar)
     }
+
+    fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
+        bottomDrawerDialog?.drawer?.shouldDrawUnderHandleView(shouldDrawUnderHandleView)
+    }
 }

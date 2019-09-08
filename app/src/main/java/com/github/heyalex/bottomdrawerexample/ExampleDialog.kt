@@ -60,17 +60,22 @@ class ExampleDialog : BottomDrawerFragment() {
         })
 
         navigation = view.findViewById(R.id.navigation_bar_accent)
-        navigation.setOnCheckedChangeListener { buttonView, isChecked ->
+        navigation.setOnCheckedChangeListener { _, isChecked ->
             changeNavigationIconColor(isChecked)
         }
         statusBar = view.findViewById(R.id.status_bar_accent)
-        statusBar.setOnCheckedChangeListener { buttonView, isChecked ->
+        statusBar.setOnCheckedChangeListener { _, isChecked ->
             changeStatusBarIconColor(isChecked)
         }
 
         drawUnderStatus = view.findViewById(R.id.should_draw_under_status_bar)
-        drawUnderStatus.setOnCheckedChangeListener { buttonView, isChecked ->
+        drawUnderStatus.setOnCheckedChangeListener { _, isChecked ->
             shouldDrawUnderStatusBar(isChecked)
+        }
+
+        drawUnderHandle = view.findViewById(R.id.should_draw_under_handle_view)
+        drawUnderHandle.setOnCheckedChangeListener { _, isChecked ->
+            shouldDrawUnderHandleView(isChecked)
         }
 
         return view
