@@ -14,14 +14,12 @@
     <style name="Plain" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">4dp</item>
         <item name="should_draw_under_status_bar">true</item>
-        <item name="bottom_drawer_background">@color/colorAccent</item>
 
     </style>
 
     <style name="Pull" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">0dp</item>
         <item name="bottom_sheet_corner_radius">26dp</item>
-        <item name="bottom_drawer_background">@color/colorAccent</item>
     </style>
 
 </resources>
