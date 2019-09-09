@@ -99,16 +99,4 @@ class ExampleDialog : BottomDrawerFragment() {
             }
         }
     }
-
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putFloat("alphaCancelButton", alphaCancelButton)
-//    }
-//
-//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-//        super.onViewStateRestored(savedInstanceState)
-//        alphaCancelButton = savedInstanceState?.getFloat("alphaCancelButton") ?: 0f
-//        cancelButton.alpha = alphaCancelButton
-//        cancelButton.isEnabled = alphaCancelButton > 0
-//    }
 }

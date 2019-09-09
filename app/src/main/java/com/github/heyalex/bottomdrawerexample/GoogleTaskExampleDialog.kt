@@ -40,7 +40,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         return view
     }
 
-    override fun prepareBottomDrawerDialog() : BottomDrawerDialog {
+    override fun prepareBottomDrawerDialog(): BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Plain
             handleView = PlainHandleView(context).apply {

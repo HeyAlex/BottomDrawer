@@ -71,6 +71,10 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         bottomDrawerDialog?.changeNavigationIconColor(isLight)
     }
 
+    fun changeHandleView(handleView: View) {
+        bottomDrawerDialog?.drawer?.addHandleView(handleView)
+    }
+
     fun shouldDrawUnderStatusBar(shouldDrawUnderStatusBar: Boolean) {
         bottomDrawerDialog?.drawer?.shouldDrawUnderStatusBar(shouldDrawUnderStatusBar)
     }
