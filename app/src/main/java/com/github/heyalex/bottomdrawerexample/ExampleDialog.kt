@@ -1,5 +1,6 @@
 package com.github.heyalex.bottomdrawerexample
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatSeekBar
+import androidx.core.content.ContextCompat
 import com.github.heyalex.bottomdrawer.BottomDrawerDialog
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PlainHandleView
@@ -29,6 +31,9 @@ class ExampleDialog : BottomDrawerFragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.example_layout, container, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.window.navigationBarColor = ContextCompat.getColor(context!!, R.color.colorPrimary)
+        }
         cornerRadiusSeekBar = view.findViewById(R.id.corner_radius_seek_bar)
         cornerRadiusSeekBar.max = 80
         cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
