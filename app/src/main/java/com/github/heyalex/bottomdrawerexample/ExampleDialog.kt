@@ -1,6 +1,5 @@
 package com.github.heyalex.bottomdrawerexample
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,10 +9,11 @@ import android.widget.FrameLayout
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatSeekBar
-import androidx.core.content.ContextCompat
 import com.github.heyalex.bottomdrawer.BottomDrawerDialog
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PlainHandleView
+import com.github.heyalex.utils.changeNavigationIconColor
+import com.github.heyalex.utils.changeStatusBarIconColor
 
 class ExampleDialog : BottomDrawerFragment() {
     private lateinit var cornerRadiusSeekBar: AppCompatSeekBar
@@ -98,36 +98,6 @@ class ExampleDialog : BottomDrawerFragment() {
                     resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_top_margin)
 
                 layoutParams = params
-            }
-        }
-    }
-
-    private fun changeNavigationIconColor(isLight: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialog?.window?.let {
-                var flags = it.decorView.systemUiVisibility
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    flags = if (isLight) {
-                        flags xor View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                    } else {
-                        flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                    }
-                }
-                it.decorView.systemUiVisibility = flags
-            }
-        }
-    }
-
-    private fun changeStatusBarIconColor(isLight: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialog?.window?.let {
-                var flags = it.decorView.systemUiVisibility
-                flags = if(isLight) {
-                    flags xor View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                } else {
-                    flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                }
-                it.decorView.systemUiVisibility = flags
             }
         }
     }
