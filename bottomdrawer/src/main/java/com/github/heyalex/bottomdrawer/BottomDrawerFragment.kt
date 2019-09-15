@@ -63,14 +63,6 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         bottomDrawerDialog?.drawer?.changeExtraPadding(extraPadding)
     }
 
-    fun changeStatusBarIconColor(isLight: Boolean) {
-        bottomDrawerDialog?.changeStatusBarIconColor(isLight)
-    }
-
-    fun changeNavigationIconColor(isLight: Boolean) {
-        bottomDrawerDialog?.changeNavigationIconColor(isLight)
-    }
-
     fun changeHandleView(handleView: View) {
         bottomDrawerDialog?.drawer?.addHandleView(handleView)
     }

@@ -31,9 +31,6 @@ class ExampleDialog : BottomDrawerFragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.example_layout, container, false)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.window.navigationBarColor = ContextCompat.getColor(context!!, R.color.colorPrimary)
-        }
         cornerRadiusSeekBar = view.findViewById(R.id.corner_radius_seek_bar)
         cornerRadiusSeekBar.max = 80
         cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -101,6 +98,36 @@ class ExampleDialog : BottomDrawerFragment() {
                     resources.getDimensionPixelSize(R.dimen.bottom_sheet_handle_top_margin)
 
                 layoutParams = params
+            }
+        }
+    }
+
+    private fun changeNavigationIconColor(isLight: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            dialog?.window?.let {
+                var flags = it.decorView.systemUiVisibility
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    flags = if (isLight) {
+                        flags xor View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                    } else {
+                        flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                    }
+                }
+                it.decorView.systemUiVisibility = flags
+            }
+        }
+    }
+
+    private fun changeStatusBarIconColor(isLight: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            dialog?.window?.let {
+                var flags = it.decorView.systemUiVisibility
+                flags = if(isLight) {
+                    flags xor View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                } else {
+                    flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                }
+                it.decorView.systemUiVisibility = flags
             }
         }
     }
