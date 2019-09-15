@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 
 class BottomDrawer : FrameLayout {
 
-    private var container: FrameLayout
+    private var container: ViewGroup
     private val rect: Rect = Rect()
 
     private val defaultBackgroundDrawable = GradientDrawable()
