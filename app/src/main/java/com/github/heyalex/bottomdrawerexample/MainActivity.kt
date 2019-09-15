@@ -3,7 +3,6 @@ package com.github.heyalex.bottomdrawerexample
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         show_button_sample.setOnClickListener {
-//            supportFragmentManager?.beginTransaction()?.add(ExampleDialog(), "test1")
+            //            supportFragmentManager?.beginTransaction()?.add(ExampleDialog(), "test1")
 //                ?.commit()
             behavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
 
