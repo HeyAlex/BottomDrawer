@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
             app:behavior_hideable="true"
+            android:theme="@style/Plain"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
