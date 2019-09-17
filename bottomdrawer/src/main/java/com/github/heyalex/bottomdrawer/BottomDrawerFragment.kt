@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
+import com.github.heyalex.utils.BottomDrawerDelegate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
@@ -43,12 +44,12 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         bottomDrawerDialog?.drawer?.globalTranslationViews()
     }
 
-    fun addBottomSheetCallback(func: BottomDrawerDialog.BottomSheetCallback.() -> Unit): BottomSheetBehavior.BottomSheetCallback? {
-        return bottomDrawerDialog?.addBottomSheetCallback(func)
+    fun addBottomSheetCallback(func: BottomDrawerDelegate.BottomSheetCallback.() -> Unit): BottomSheetBehavior.BottomSheetCallback? {
+        return bottomDrawerDialog?.bottomDrawerDelegate?.addBottomSheetCallback(func)
     }
 
     fun removeBottomSheetCallback(callback: BottomSheetBehavior.BottomSheetCallback) {
-        bottomDrawerDialog?.removeBottomSheetCallback(callback)
+        bottomDrawerDialog?.bottomDrawerDelegate?.removeBottomSheetCallback(callback)
     }
 
     fun changeCornerRadius(radius: Float) {

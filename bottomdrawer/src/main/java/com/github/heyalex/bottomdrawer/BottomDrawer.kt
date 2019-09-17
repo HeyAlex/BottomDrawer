@@ -267,7 +267,7 @@ class BottomDrawer : FrameLayout {
         diffWithStatusBar += extraPadding
     }
 
-    internal fun addHandleView(newHandleView: View?) {
+    fun addHandleView(newHandleView: View?) {
         handleView = newHandleView
         handleView?.let { view ->
             super.addView(view)

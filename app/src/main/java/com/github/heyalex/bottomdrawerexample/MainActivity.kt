@@ -4,9 +4,16 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
+import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.github.heyalex.bottomdrawer.BottomDrawer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,10 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main_test)
         coordinator = findViewById(R.id.bottom_sheet_coordinator)
         drawer = coordinator.findViewById(R.id.bottom_sheet_drawer) as BottomDrawer
         behavior = BottomSheetBehavior.from(drawer)
+
+//        drawer.addView(wrappedView)
+//        drawer.addHandleView(handleView)
 
         window?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
