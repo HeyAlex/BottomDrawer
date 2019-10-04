@@ -7,6 +7,7 @@
     android:layout_alignParentLeft="true"
     android:layout_toStartOf="@id/cancel"
     android:layout_toLeftOf="@id/cancel"
+    android:background="@android:color/transparent"
     android:orientation="horizontal">
 
     <TextView
@@ -16,7 +17,6 @@
         android:gravity="center"
         android:text="A"
         android:id="@+id/text_header"
-        android:textColor="@android:color/white"
         android:textSize="20sp" />
 
     <LinearLayout
