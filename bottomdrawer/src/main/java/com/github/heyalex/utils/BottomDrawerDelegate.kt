@@ -1,5 +1,6 @@
 package com.github.heyalex.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -32,6 +33,7 @@ class BottomDrawerDelegate(
     internal var isCancelableOnTouchOutside = true
     internal var handleView: View? = null
 
+    @SuppressLint("ClickableViewAccessibility")
     fun wrapInBottomSheet(
         layoutResId: Int,
         view: View?,
