@@ -69,11 +69,11 @@ class CustomExampleDialog : BottomDrawerFragment() {
         }
 
         colorSeekBar = view.findViewById(R.id.colorSlider)
-        colorSeekBar.setOnColorChangeListener(object : ColorSeekBar.OnColorChangeListener {
-            override fun onColorChangeListener(colorBarPosition: Int, alphaBarPosition: Int, color: Int) {
+        colorSeekBar.setOnColorChangeListener { _, _, color ->
+            if(!colorSeekBar.isFirstDraw) {
                 changeBackgroundColor(color)
             }
-        })
+        }
 
         return view
     }

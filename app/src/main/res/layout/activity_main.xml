@@ -25,7 +25,6 @@
             android:layout_gravity="center"
             android:text="Custom Bottom Drawer" />
 
-
     </LinearLayout>
 
 </FrameLayout>

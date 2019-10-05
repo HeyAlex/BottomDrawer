@@ -50,7 +50,6 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         }
         cancelButton.setOnClickListener { dismissWithBehavior() }
 
-
         cornerRadiusSeekBar = view.findViewById(R.id.corner_radius_seek_bar)
         cornerRadiusSeekBar.max = 80
         cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -76,11 +75,11 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         }
 
         colorSeekBar = view.findViewById(R.id.colorSlider)
-        colorSeekBar.setOnColorChangeListener(object : ColorSeekBar.OnColorChangeListener {
-            override fun onColorChangeListener(colorBarPosition: Int, alphaBarPosition: Int, color: Int) {
+        colorSeekBar.setOnColorChangeListener { _, _, color ->
+            if(!colorSeekBar.isFirstDraw) {
                 changeBackgroundColor(color)
             }
-        })
+        }
 
         return view
     }

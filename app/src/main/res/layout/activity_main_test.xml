@@ -75,7 +75,9 @@
                 <com.github.heyalex.expandable_cardview.ExpandableCardView
                     android:id="@+id/expandble_profile"
                     android:layout_width="match_parent"
+                    app:cardBackgroundColor="@android:color/transparent"
                     android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
                     android:layout_margin="0dp"
                     app:animation_duration="250"
                     app:cardCornerRadius="0dp"
