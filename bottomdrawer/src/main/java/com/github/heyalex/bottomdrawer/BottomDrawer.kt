@@ -326,6 +326,8 @@ class BottomDrawer : FrameLayout {
 
     fun changeBackgroundColor(color: Int) {
         drawerBackground = color
+        cornerRadiusDrawable.setColor(drawerBackground)
+        defaultBackgroundDrawable.setColor(drawerBackground)
         invalidate()
     }
 

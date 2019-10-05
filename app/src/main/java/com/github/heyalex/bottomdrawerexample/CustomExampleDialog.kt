@@ -15,6 +15,7 @@ import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PullHandleView
 import com.github.heyalex.utils.changeNavigationIconColor
 import com.github.heyalex.utils.changeStatusBarIconColor
+import com.rtugeek.android.colorseekbar.ColorSeekBar
 
 class CustomExampleDialog : BottomDrawerFragment() {
 
@@ -25,6 +26,7 @@ class CustomExampleDialog : BottomDrawerFragment() {
 
     private lateinit var navigation: AppCompatCheckBox
     private lateinit var statusBar: AppCompatCheckBox
+    private lateinit var colorSeekBar: ColorSeekBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +67,13 @@ class CustomExampleDialog : BottomDrawerFragment() {
         statusBar.setOnCheckedChangeListener { _, isChecked ->
             changeStatusBarIconColor(isChecked)
         }
+
+        colorSeekBar = view.findViewById(R.id.colorSlider)
+        colorSeekBar.setOnColorChangeListener(object : ColorSeekBar.OnColorChangeListener {
+            override fun onColorChangeListener(colorBarPosition: Int, alphaBarPosition: Int, color: Int) {
+                changeBackgroundColor(color)
+            }
+        })
 
         return view
     }

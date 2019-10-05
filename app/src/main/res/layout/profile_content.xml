@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentStart="true"
     android:layout_alignParentLeft="true"
     android:layout_toStartOf="@id/cancel"
     android:layout_toLeftOf="@id/cancel"
+    android:background="@android:color/transparent"
     android:orientation="vertical"
     android:tag="@string/click_marker">
 
     <androidx.appcompat.widget.AppCompatSeekBar
-        android:layout_marginTop="6dp"
         android:id="@+id/corner_radius_seek_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp" />
+
+    <com.rtugeek.android.colorseekbar.ColorSeekBar
+        android:id="@+id/colorSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:colorSeeds="@array/material_colors" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/status_bar_accent"
@@ -28,45 +36,45 @@
         android:layout_height="match_parent"
         android:checked="false"
         android:text="Navigation Bar" />
-<!--    -->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:orientation="horizontal">-->
+    <!--    -->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:orientation="horizontal">-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingLeft="7dp"-->
-<!--            android:paddingRight="18dp"-->
-<!--            android:src="@drawable/ic_person_add_black_24dp" />-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:paddingLeft="7dp"-->
+    <!--            android:paddingRight="18dp"-->
+    <!--            android:src="@drawable/ic_person_add_black_24dp" />-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Add account"-->
-<!--            android:textSize="14sp" />-->
-<!--    </LinearLayout>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Add account"-->
+    <!--            android:textSize="14sp" />-->
+    <!--    </LinearLayout>-->
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:orientation="horizontal">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="horizontal">-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingLeft="7dp"-->
-<!--            android:paddingRight="18dp"-->
-<!--            android:src="@drawable/ic_settings_black_24dp" />-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:paddingLeft="7dp"-->
+    <!--            android:paddingRight="18dp"-->
+    <!--            android:src="@drawable/ic_settings_black_24dp" />-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Settings"-->
-<!--            android:textSize="14sp" />-->
-<!--    </LinearLayout>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Settings"-->
+    <!--            android:textSize="14sp" />-->
+    <!--    </LinearLayout>-->
 
 </LinearLayout>

@@ -6,9 +6,9 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <Button
@@ -19,18 +19,13 @@
             android:text="Google Bottom Drawer" />
 
         <Button
-        android:id="@+id/show_button_sample"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Custom Bottom Drawer" />
-
-        <Button
-            android:id="@+id/show_button_sample_runtime"
+            android:id="@+id/show_button_sample"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Custom Edit Bottom Drawer" />
+            android:text="Custom Bottom Drawer" />
+
+
     </LinearLayout>
 
 </FrameLayout>
