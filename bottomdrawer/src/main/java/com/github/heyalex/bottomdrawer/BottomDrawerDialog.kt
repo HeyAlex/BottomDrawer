@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.BottomDialogTheme) :
     AppCompatDialog(context, theme), BottomDialog {
 
-    internal var bottomDrawerDelegate = BottomDrawerDelegate(context, this)
+    internal var bottomDrawerDelegate = BottomDrawerDelegate(this.context, this)
     internal val drawer: BottomDrawer?
         get() = bottomDrawerDelegate.drawer
 
