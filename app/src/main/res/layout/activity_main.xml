@@ -19,11 +19,18 @@
             android:text="Google Bottom Drawer" />
 
         <Button
-            android:id="@+id/show_button_sample"
+        android:id="@+id/show_button_sample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Custom Bottom Drawer" />
+
+        <Button
+            android:id="@+id/show_button_sample_runtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Custom Bottom Drawer" />
+            android:text="Custom Edit Bottom Drawer" />
     </LinearLayout>
 
 </FrameLayout>

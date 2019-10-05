@@ -7,14 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.SeekBar
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.AppCompatSeekBar
 import com.github.heyalex.bottomdrawer.BottomDrawerDialog
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.github.heyalex.handle.PullHandleView
+import com.github.heyalex.utils.changeNavigationIconColor
+import com.github.heyalex.utils.changeStatusBarIconColor
 
 class CustomExampleDialog : BottomDrawerFragment() {
 
     private var alphaCancelButton = 0f
     private lateinit var cancelButton: ImageView
+
+    private lateinit var cornerRadiusSeekBar: AppCompatSeekBar
+
+    private lateinit var navigation: AppCompatCheckBox
+    private lateinit var statusBar: AppCompatCheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +41,31 @@ class CustomExampleDialog : BottomDrawerFragment() {
             }
         }
         cancelButton.setOnClickListener { dismissWithBehavior() }
+
+        cornerRadiusSeekBar = view.findViewById(R.id.corner_radius_seek_bar)
+        cornerRadiusSeekBar.max = 80
+        cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                changeCornerRadius(progress.toFloat())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+
+        navigation = view.findViewById(R.id.navigation_bar_accent)
+        navigation.setOnCheckedChangeListener { _, isChecked ->
+            changeNavigationIconColor(isChecked)
+        }
+        statusBar = view.findViewById(R.id.status_bar_accent)
+        statusBar.setOnCheckedChangeListener { _, isChecked ->
+            changeStatusBarIconColor(isChecked)
+        }
+
         return view
     }
 

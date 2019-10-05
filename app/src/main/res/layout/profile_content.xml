@@ -9,45 +9,64 @@
     android:orientation="vertical"
     android:tag="@string/click_marker">
 
-
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:layout_marginTop="6dp"
+        android:id="@+id/corner_radius_seek_bar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/status_bar_accent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:checked="false"
+        android:text="Light Status Bar" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="7dp"
-            android:paddingRight="18dp"
-            android:src="@drawable/ic_person_add_black_24dp" />
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/navigation_bar_accent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:checked="false"
+        android:text="Navigation Bar" />
+<!--    -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add account"
-            android:textSize="14sp" />
-    </LinearLayout>
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingLeft="7dp"-->
+<!--            android:paddingRight="18dp"-->
+<!--            android:src="@drawable/ic_person_add_black_24dp" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Add account"-->
+<!--            android:textSize="14sp" />-->
+<!--    </LinearLayout>-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="7dp"
-            android:paddingRight="18dp"
-            android:src="@drawable/ic_settings_black_24dp" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="14sp" />
-    </LinearLayout>
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingLeft="7dp"-->
+<!--            android:paddingRight="18dp"-->
+<!--            android:src="@drawable/ic_settings_black_24dp" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Settings"-->
+<!--            android:textSize="14sp" />-->
+<!--    </LinearLayout>-->
 
 </LinearLayout>
