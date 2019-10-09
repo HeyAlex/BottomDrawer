@@ -17,7 +17,7 @@ import com.github.heyalex.utils.changeNavigationIconColor
 import com.github.heyalex.utils.changeStatusBarIconColor
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 
-class CustomExampleDialog : BottomDrawerFragment() {
+class PullExampleDialog : BottomDrawerFragment() {
 
     private var alphaCancelButton = 0f
     private lateinit var cancelButton: ImageView

@@ -2,7 +2,10 @@ package com.github.heyalex.utils
 
 import android.os.Build
 import android.view.View
+import android.view.WindowManager
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.DialogFragment
+
 
 fun DialogFragment.changeNavigationIconColor(isLight: Boolean) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -24,7 +27,7 @@ fun DialogFragment.changeStatusBarIconColor(isLight: Boolean) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         dialog?.window?.let {
             var flags = it.decorView.systemUiVisibility
-            flags = if(isLight) {
+            flags = if (isLight) {
                 flags xor View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             } else {
                 flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         show_button_sample.setOnClickListener {
-            supportFragmentManager?.beginTransaction()?.add(CustomExampleDialog(), "test1")
+            supportFragmentManager?.beginTransaction()?.add(PullExampleDialog(), "test1")
                 ?.commit()
         }
     }
