@@ -36,6 +36,10 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         bottomDrawerDialog?.behavior?.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
+    fun expandWithBehaivor() {
+        bottomDrawerDialog?.behavior?.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
     fun getCurrentState(): Int? {
         return bottomDrawerDialog?.behavior?.state
     }
