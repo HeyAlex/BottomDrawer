@@ -25,6 +25,13 @@
             android:layout_gravity="center"
             android:text="Custom Bottom Drawer" />
 
+        <Button
+            android:id="@+id/show_button_second_sample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Custom Bottom Drawer" />
+
     </LinearLayout>
 
 </FrameLayout>

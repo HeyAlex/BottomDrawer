@@ -7,4 +7,8 @@
     <dimen name="sample_bottom_sheet_handle_width">36dp</dimen>
     <dimen name="sample_bottom_sheet_handle_height">12dp</dimen>
     <dimen name="sample_bottom_sheet_handle_top_margin">8dp</dimen>
+
+    <dimen name="rotate_sample_bottom_sheet_handle_width">35dp</dimen>
+    <dimen name="rotate_sample_bottom_sheet_handle_height">35dp</dimen>
+    <dimen name="rotate_sample_bottom_sheet_handle_margin">14dp</dimen>
 </resources>

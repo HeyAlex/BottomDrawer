@@ -54,5 +54,10 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager?.beginTransaction()?.add(PullExampleDialog(), "test1")
                 ?.commit()
         }
+
+        show_button_second_sample.setOnClickListener {
+            supportFragmentManager?.beginTransaction()?.add(RotateExampleDialog(), "test1")
+                ?.commit()
+        }
     }
 }

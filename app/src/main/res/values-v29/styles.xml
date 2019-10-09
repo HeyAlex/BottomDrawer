@@ -21,4 +21,10 @@
         <item name="bottom_sheet_extra_padding">0dp</item>
         <item name="bottom_sheet_corner_radius">26dp</item>
     </style>
+
+    <style name="Rotate" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">0dp</item>
+        <item name="bottom_sheet_corner_radius">26dp</item>
+        <item name="should_draw_content_under_handle_view">true</item>
+    </style>
 </resources>
