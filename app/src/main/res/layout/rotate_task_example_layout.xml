@@ -188,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:text="LAST ITEM KEK"
+                android:text="LAST ITEM"
                 android:textSize="20sp" />
 
         </LinearLayout>

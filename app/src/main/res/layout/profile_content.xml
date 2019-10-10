@@ -15,7 +15,7 @@
         android:id="@+id/corner_radius_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp" />
+        android:layout_marginTop="9dp" />
 
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSlider"
