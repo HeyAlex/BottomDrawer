@@ -42,7 +42,6 @@ class BottomDrawer : FrameLayout {
     private var fullHeight: Int
     private var collapseHeight: Int
 
-    //TODO make params
     private var shouldDrawUnderStatus: Boolean = false
     private var shouldDrawUnderHandle: Boolean = false
 
@@ -75,7 +74,6 @@ class BottomDrawer : FrameLayout {
             layoutParams = params
         }
         super.addView(container)
-        container.clipToPadding = false
         onSlide(0f)
     }
 
