@@ -7,8 +7,8 @@ This library provide modal bottom sheet with animations.
 ![](/raw/sample_google_task.gif)
 
 ## Sample
-![](/raw/sample_custom_1.gif)
-![](/raw/sample_custom_2.gif)
+![](/raw/sample_custom_pull.gif)
+![](/raw/sample_custom_arrow.gif)
 
 ## Usage
 
