@@ -20,7 +20,9 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         return dialog
     }
 
-    abstract fun prepareBottomDrawerDialog() : BottomDrawerDialog
+    open fun prepareBottomDrawerDialog() : BottomDrawerDialog {
+        return BottomDrawerDialog(context!!)
+    }
 
     override fun onStart() {
         super.onStart()
