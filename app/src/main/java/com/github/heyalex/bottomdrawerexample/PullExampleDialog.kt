@@ -70,7 +70,7 @@ class PullExampleDialog : BottomDrawerFragment() {
 
         colorSeekBar = view.findViewById(R.id.colorSlider)
         colorSeekBar.setOnColorChangeListener { _, _, color ->
-            if(!colorSeekBar.isFirstDraw) {
+            if (!colorSeekBar.isFirstDraw) {
                 changeBackgroundColor(color)
             }
         }
