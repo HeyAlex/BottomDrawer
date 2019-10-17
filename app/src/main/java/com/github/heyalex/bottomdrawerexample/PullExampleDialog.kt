@@ -78,7 +78,7 @@ class PullExampleDialog : BottomDrawerFragment() {
         return view
     }
 
-    override fun prepareBottomDrawerDialog(): BottomDrawerDialog {
+    override fun configureBottomDrawer(): BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Pull
             handleView = PullHandleView(context).apply {

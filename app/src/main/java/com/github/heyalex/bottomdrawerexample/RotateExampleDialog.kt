@@ -67,7 +67,7 @@ class RotateExampleDialog : BottomDrawerFragment() {
         return view
     }
 
-    override fun prepareBottomDrawerDialog(): BottomDrawerDialog {
+    override fun configureBottomDrawer(): BottomDrawerDialog {
         return BottomDrawerDialog.build(context!!) {
             theme = R.style.Rotate
             handleView = RotateHandleView(context).apply {

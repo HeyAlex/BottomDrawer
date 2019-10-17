@@ -14,7 +14,6 @@
     <style name="Plain" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">4dp</item>
         <item name="should_draw_under_status_bar">true</item>
-
     </style>
 
     <style name="Pull" parent="BottomDialogTheme">

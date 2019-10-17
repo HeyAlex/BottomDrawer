@@ -2,11 +2,8 @@ package com.github.heyalex.bottomdrawer
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import androidx.annotation.LayoutRes
 import com.github.heyalex.utils.BottomDrawerDelegate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -15,12 +12,12 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     private var bottomDrawerDialog: BottomDrawerDialog? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = prepareBottomDrawerDialog()
+        val dialog = configureBottomDrawer()
         bottomDrawerDialog = dialog
         return dialog
     }
 
-    open fun prepareBottomDrawerDialog() : BottomDrawerDialog {
+    open fun configureBottomDrawer() : BottomDrawerDialog {
         return BottomDrawerDialog(context!!)
     }
 
