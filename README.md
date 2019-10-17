@@ -66,6 +66,27 @@ changeCornerRadius(radius: Float)
 changeBackgroundColor(color: Int)
 ```
 
+## Integration
+
+This library is available on **jitpack**, so you need to add this repository to your root build.gradle:
+
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Add the dependency:
+
+```groovy
+dependencies {
+    implementation 'com.github.HeyAlex:BottomDrawer:v1.0.0'
+}
+```
+
 ## Samples
 You can find more samples in app module, to understand functionality of library.
 
