@@ -66,16 +66,4 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
     fun changeExtraPadding(extraPadding: Int) {
         bottomDrawerDialog?.drawer?.changeExtraPadding(extraPadding)
     }
-
-    fun changeHandleView(handleView: View) {
-        bottomDrawerDialog?.drawer?.addHandleView(handleView)
-    }
-
-    fun shouldDrawUnderStatusBar(shouldDrawUnderStatusBar: Boolean) {
-        bottomDrawerDialog?.drawer?.shouldDrawUnderStatusBar(shouldDrawUnderStatusBar)
-    }
-
-    fun shouldDrawUnderHandleView(shouldDrawUnderHandleView: Boolean) {
-        bottomDrawerDialog?.drawer?.shouldDrawUnderHandleView(shouldDrawUnderHandleView)
-    }
 }
