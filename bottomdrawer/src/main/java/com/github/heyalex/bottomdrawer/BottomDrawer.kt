@@ -285,7 +285,7 @@ class BottomDrawer : FrameLayout {
             topRightCorner = RoundedCornerTreatment(cornerRadius)
         }
         backgroundDrawable.shapedViewModel = shapePathModel
-        backgroundDrawable.interpolation = 1f
+        backgroundDrawable.interpolation = if (!isEnoughToFullExpand) 1f else 0f
 
         invalidate()
     }
