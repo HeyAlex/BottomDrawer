@@ -272,23 +272,8 @@ class BottomDrawer : FrameLayout {
         }
     }
 
-    override fun onApplyWindowInsets(insets: WindowInsets): WindowInsets {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            heightPixels = context.resources.displayMetrics.heightPixels
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                heightPixels -= insets.systemWindowInsetTop
-            }
-
-            fullHeight = heightPixels
-            collapseHeight = heightPixels / 2
-
-            calculateDiffStatusBar(insets.systemWindowInsetTop)
-        }
-        return super.onApplyWindowInsets(insets)
-    }
-
     private fun View.setMarginExtensionFunction(left: Int, top: Int, right: Int, bottom: Int) {
-        val params = layoutParams as ViewGroup.MarginLayoutParams
+        val params = layoutParams as MarginLayoutParams
         params.setMargins(left, top, right, bottom)
         layoutParams = params
     }
