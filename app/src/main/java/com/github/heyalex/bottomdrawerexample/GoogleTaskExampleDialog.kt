@@ -51,7 +51,7 @@ class GoogleTaskExampleDialog : BottomDrawerFragment() {
         cancelButton.setOnClickListener { dismissWithBehavior() }
 
         cornerRadiusSeekBar = view.findViewById(R.id.corner_radius_seek_bar)
-        cornerRadiusSeekBar.max = 80
+        cornerRadiusSeekBar.max = 200
         cornerRadiusSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 changeCornerRadius(progress.toFloat())
