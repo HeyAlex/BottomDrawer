@@ -53,7 +53,8 @@ class BottomDrawer : FrameLayout {
         setWillNotDraw(false)
 
         val shapePathModel = ShapePathModel().apply {
-            setAllCorners(RoundedCornerTreatment(cornerRadius))
+            topLeftCorner = RoundedCornerTreatment(cornerRadius)
+            topRightCorner = RoundedCornerTreatment(cornerRadius)
         }
         backgroundDrawable.apply {
             shapedViewModel = shapePathModel
@@ -295,7 +296,8 @@ class BottomDrawer : FrameLayout {
     fun changeCornerRadius(radius: Float) {
         cornerRadius = radius
         val shapePathModel = ShapePathModel().apply {
-            setAllCorners(RoundedCornerTreatment(cornerRadius))
+            topLeftCorner = RoundedCornerTreatment(cornerRadius)
+            topRightCorner = RoundedCornerTreatment(cornerRadius)
         }
         backgroundDrawable.shapedViewModel = shapePathModel
         backgroundDrawable.interpolation = 1f
