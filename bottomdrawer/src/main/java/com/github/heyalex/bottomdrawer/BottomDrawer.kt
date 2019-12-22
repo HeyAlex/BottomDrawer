@@ -3,6 +3,7 @@ package com.github.heyalex.bottomdrawer
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
+import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -10,6 +11,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -57,9 +59,32 @@ class BottomDrawer : FrameLayout {
 
         calculateDiffStatusBar(0)
 
-        heightPixels = context.resources.displayMetrics.heightPixels
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val smallest = Point()
+        val tallest = Point()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            display.getCurrentSizeRange(smallest, tallest)
+        }
+
+        heightPixels = tallest.y
         fullHeight = heightPixels
         collapseHeight = heightPixels / 2
+
+        ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                heightPixels = context.resources.displayMetrics.heightPixels
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    heightPixels -= insets.systemWindowInsetTop
+                }
+
+                fullHeight = heightPixels
+                collapseHeight = heightPixels / 2
+
+                calculateDiffStatusBar(insets.systemWindowInsetTop)
+            }
+            insets.consumeSystemWindowInsets()
+        }
 
         container = FrameLayout(context).apply {
             val params =
