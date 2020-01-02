@@ -2,12 +2,13 @@ package com.github.heyalex.bottomdrawer
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import android.view.ViewTreeObserver
 import com.github.heyalex.utils.BottomDrawerDelegate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.shape.CornerFamily
 
-abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), ViewTreeObserver.OnGlobalLayoutListener {
+abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(),
+    ViewTreeObserver.OnGlobalLayoutListener {
 
     private var bottomDrawerDialog: BottomDrawerDialog? = null
 
@@ -17,14 +18,14 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
         return dialog
     }
 
-    open fun configureBottomDrawer() : BottomDrawerDialog {
+    open fun configureBottomDrawer(): BottomDrawerDialog {
         return BottomDrawerDialog(context!!)
     }
 
     override fun onStart() {
         super.onStart()
         bottomDrawerDialog?.drawer?.viewTreeObserver?.addOnGlobalLayoutListener(this)
-        dialog.setOnDismissListener {
+        dialog!!.setOnDismissListener {
             if (isAdded) {
                 dismissAllowingStateLoss()
             }
@@ -57,6 +58,10 @@ abstract class BottomDrawerFragment : androidx.fragment.app.DialogFragment(), Vi
 
     fun changeCornerRadius(radius: Float) {
         bottomDrawerDialog?.drawer?.changeCornerRadius(radius)
+    }
+
+    fun changeTopCornerTreatment(@CornerFamily cornerFamily: Int) {
+        bottomDrawerDialog?.drawer?.changeCornerTreatment(cornerFamily)
     }
 
     fun changeBackgroundColor(color: Int) {

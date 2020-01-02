@@ -14,9 +14,9 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.RoundedCornerTreatment
-import com.google.android.material.shape.ShapePathModel
+import com.google.android.material.shape.ShapeAppearanceModel
 
 class BottomDrawer : FrameLayout {
 
@@ -46,18 +46,19 @@ class BottomDrawer : FrameLayout {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
+    private var appearanceModel: ShapeAppearanceModel = ShapeAppearanceModel()
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
         : super(context, attrs, defStyleAttr) {
 
         initAttributes(context, attrs)
         setWillNotDraw(false)
 
-        val shapePathModel = ShapePathModel().apply {
-            topLeftCorner = RoundedCornerTreatment(cornerRadius)
-            topRightCorner = RoundedCornerTreatment(cornerRadius)
-        }
         backgroundDrawable.apply {
-            shapedViewModel = shapePathModel
+            shapeAppearanceModel = appearanceModel.toBuilder().apply {
+                setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+                setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
+            }.build()
             setTint(drawerBackground)
             paintStyle = Paint.Style.FILL
         }
@@ -280,12 +281,25 @@ class BottomDrawer : FrameLayout {
 
     fun changeCornerRadius(radius: Float) {
         cornerRadius = radius
-        val shapePathModel = ShapePathModel().apply {
-            topLeftCorner = RoundedCornerTreatment(cornerRadius)
-            topRightCorner = RoundedCornerTreatment(cornerRadius)
+        appearanceModel.toBuilder().apply {
+            setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+            setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
         }
-        backgroundDrawable.shapedViewModel = shapePathModel
+
+        backgroundDrawable.shapeAppearanceModel = appearanceModel
         backgroundDrawable.interpolation = if (!isEnoughToFullExpand) 1f else 0f
+
+        invalidate()
+    }
+
+    fun changeCornerTreatment(@CornerFamily cornerFamily: Int) {
+        val shapeAppearanceModel = ShapeAppearanceModel().toBuilder().apply {
+            setTopLeftCorner(cornerFamily, cornerRadius)
+            setTopRightCorner(cornerFamily, cornerRadius)
+        }
+
+        backgroundDrawable.shapeAppearanceModel = shapeAppearanceModel.build()
+        backgroundDrawable.interpolation = 1f
 
         invalidate()
     }
