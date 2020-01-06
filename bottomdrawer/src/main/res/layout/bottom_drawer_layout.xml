@@ -21,11 +21,13 @@
             tools:ignore="UnusedAttribute" />
 
         <com.github.heyalex.bottomdrawer.BottomDrawer
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.BottomDrawer"
             android:id="@+id/bottom_sheet_drawer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
             app:behavior_hideable="true"
+
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

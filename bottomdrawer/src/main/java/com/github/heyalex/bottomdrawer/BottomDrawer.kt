@@ -1,6 +1,7 @@
 package com.github.heyalex.bottomdrawer
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -23,7 +24,7 @@ class BottomDrawer : FrameLayout {
     private var container: ViewGroup
     private val rect: Rect = Rect()
 
-    private val backgroundDrawable = MaterialShapeDrawable()
+    private val backgroundDrawable: MaterialShapeDrawable
     private var drawerBackground: Int = 0
     private var cornerRadius: Float = 0f
     private var extraPadding: Int = 0
@@ -46,21 +47,20 @@ class BottomDrawer : FrameLayout {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    private var appearanceModel: ShapeAppearanceModel = ShapeAppearanceModel()
-
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
         : super(context, attrs, defStyleAttr) {
 
-        initAttributes(context, attrs)
         setWillNotDraw(false)
-
-        backgroundDrawable.apply {
-            shapeAppearanceModel = appearanceModel.toBuilder().apply {
-                setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
-                setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
-            }.build()
-            setTint(drawerBackground)
-            paintStyle = Paint.Style.FILL
+        initAttributes(context, attrs)
+        backgroundDrawable  = MaterialShapeDrawable(
+            ShapeAppearanceModel.builder(
+                context,
+                attrs,
+                R.attr.bottomSheetStyle,
+                0
+            ).build()
+        ).apply {
+            fillColor = ColorStateList.valueOf(drawerBackground)
         }
 
         calculateDiffStatusBar(0)
@@ -227,8 +227,10 @@ class BottomDrawer : FrameLayout {
         translateViews(1f, translationView.toInt())
         if (translationView == 0f && Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             translationUpdater?.updateTranslation(0f)
+            backgroundDrawable.interpolation = 1f
         } else if (top == 0) {
             translationUpdater?.updateTranslation(1f)
+            backgroundDrawable.interpolation = 0f
         }
     }
 
@@ -280,16 +282,16 @@ class BottomDrawer : FrameLayout {
     }
 
     fun changeCornerRadius(radius: Float) {
-        cornerRadius = radius
-        appearanceModel.toBuilder().apply {
-            setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
-            setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
-        }
-
-        backgroundDrawable.shapeAppearanceModel = appearanceModel
-        backgroundDrawable.interpolation = if (!isEnoughToFullExpand) 1f else 0f
-
-        invalidate()
+//        cornerRadius = radius
+//        appearanceModel.toBuilder().apply {
+//            setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+//            setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
+//        }
+//
+//        backgroundDrawable.shapeAppearanceModel = appearanceModel
+//        backgroundDrawable.interpolation = if (!isEnoughToFullExpand) 1f else 0f
+//
+//        invalidate()
     }
 
     fun changeCornerTreatment(@CornerFamily cornerFamily: Int) {
