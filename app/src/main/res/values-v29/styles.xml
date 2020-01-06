@@ -9,7 +9,20 @@
         <item name="android:navigationBarColor">#80FFFFFF</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.BottomDrawer.LargeComponent</item>
     </style>
+
+    <style name="ShapeAppearance.BottomDrawer.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.BottomDrawer" parent="ShapeAppearanceOverlay.TopLeftCut">
+        <item name="cornerSizeTopLeft">@dimen/minimized_sheet_top_left_radius</item>
+    </style>
+
+    <dimen name="minimized_sheet_top_left_radius">20dp</dimen>
 
     <style name="Plain" parent="BottomDialogTheme">
         <item name="bottom_sheet_extra_padding">4dp</item>

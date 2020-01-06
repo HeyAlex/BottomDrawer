@@ -5,7 +5,20 @@
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.BottomDrawer.LargeComponent</item>
     </style>
+
+    <style name="ShapeAppearance.BottomDrawer.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.BottomDrawer" parent="ShapeAppearanceOverlay.TopLeftCut">
+        <item name="cornerSizeTopLeft">@dimen/minimized_sheet_top_left_radius</item>
+    </style>
+
+    <dimen name="minimized_sheet_top_left_radius">20dp</dimen>
 
     <style name="Divider">
         <item name="android:background">?android:attr/listDivider</item>
