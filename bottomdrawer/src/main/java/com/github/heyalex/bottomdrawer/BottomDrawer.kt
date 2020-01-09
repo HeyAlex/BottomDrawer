@@ -4,15 +4,16 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Build
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.google.android.material.shape.CornerFamily
@@ -20,6 +21,11 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 
 class BottomDrawer : FrameLayout {
+
+    @LayoutRes
+    private var contentViewRes: Int = 0
+
+    private lateinit var content: View
 
     private var container: ViewGroup
     private val rect: Rect = Rect()
@@ -52,7 +58,13 @@ class BottomDrawer : FrameLayout {
 
         setWillNotDraw(false)
         initAttributes(context, attrs)
-        backgroundDrawable  = MaterialShapeDrawable(
+
+        content = LayoutInflater.from(context).inflate(contentViewRes, null).apply {
+            layoutParams =
+                FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+
+        backgroundDrawable = MaterialShapeDrawable(
             ShapeAppearanceModel.builder(
                 context,
                 attrs,
@@ -102,6 +114,9 @@ class BottomDrawer : FrameLayout {
             layoutParams = params
         }
         super.addView(container)
+        if (contentViewRes != View.NO_ID) {
+            addView(content)
+        }
         onSlide(0f)
     }
 
@@ -133,6 +148,10 @@ class BottomDrawer : FrameLayout {
                 R.styleable.BottomDrawer_bottom_drawer_background,
                 ContextCompat.getColor(context, R.color.bottom_drawer_background)
             )
+
+            contentViewRes =
+                attr.getResourceId(R.styleable.BottomDrawer_content_view, View.NO_ID)
+
 
         } finally {
             attr?.recycle()
