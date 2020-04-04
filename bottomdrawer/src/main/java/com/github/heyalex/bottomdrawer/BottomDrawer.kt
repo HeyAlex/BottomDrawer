@@ -23,7 +23,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 class BottomDrawer : FrameLayout {
 
     @LayoutRes
-    private var contentViewRes: Int = 0
+    private var contentViewRes: Int = View.NO_ID
 
     private lateinit var content: View
 
@@ -59,9 +59,11 @@ class BottomDrawer : FrameLayout {
         setWillNotDraw(false)
         initAttributes(context, attrs)
 
-        content = LayoutInflater.from(context).inflate(contentViewRes, null).apply {
-            layoutParams =
-                FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        if (contentViewRes != View.NO_ID) {
+            content = LayoutInflater.from(context).inflate(contentViewRes, null).apply {
+                layoutParams =
+                    LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            }
         }
 
         backgroundDrawable = MaterialShapeDrawable(
