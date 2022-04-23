@@ -79,7 +79,7 @@ open class BottomDrawerDialog(context: Context, @StyleRes theme: Int = R.style.B
         bottomDrawerDelegate.onBackPressed()
     }
 
-    override fun onSaveInstanceState(): Bundle? {
+    override fun onSaveInstanceState(): Bundle {
         val superState = super.onSaveInstanceState()
         bottomDrawerDelegate.onSaveInstanceState(superState)
         return superState

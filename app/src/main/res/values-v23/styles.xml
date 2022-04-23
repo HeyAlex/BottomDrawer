@@ -12,34 +12,4 @@
         <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.BottomDrawer.LargeComponent</item>
     </style>
-
-    <style name="ShapeAppearance.BottomDrawer.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">0dp</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.BottomDrawer" parent="ShapeAppearanceOverlay.TopLeftCut">
-        <item name="cornerSizeTopLeft">@dimen/minimized_sheet_top_left_radius</item>
-    </style>
-
-    <dimen name="minimized_sheet_top_left_radius">20dp</dimen>
-
-
-    <style name="Plain" parent="BottomDialogTheme">
-        <item name="bottom_sheet_extra_padding">4dp</item>
-        <item name="should_draw_under_status_bar">true</item>
-
-    </style>
-
-    <style name="Pull" parent="BottomDialogTheme">
-        <item name="bottom_sheet_extra_padding">0dp</item>
-        <item name="bottom_sheet_corner_radius">26dp</item>
-    </style>
-
-    <style name="Rotate" parent="BottomDialogTheme">
-        <item name="bottom_sheet_extra_padding">0dp</item>
-        <item name="bottom_sheet_corner_radius">26dp</item>
-        <item name="should_draw_content_under_handle_view">true</item>
-    </style>
-
 </resources>

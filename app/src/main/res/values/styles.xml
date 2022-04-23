@@ -10,15 +10,18 @@
     </style>
 
     <style name="ShapeAppearance.BottomDrawer.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">0dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.BottomDrawer" parent="ShapeAppearanceOverlay.TopLeftCut">
-        <item name="cornerSizeTopLeft">@dimen/minimized_sheet_top_left_radius</item>
+    <style name="ShapeAppearanceOverlay.BottomDrawer" parent="ShapeAppearanceOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="cornerSizeTopLeft">@dimen/minimized_sheet_radius</item>
+        <item name="cornerSizeTopRight">@dimen/minimized_sheet_radius</item>
     </style>
 
-    <dimen name="minimized_sheet_top_left_radius">20dp</dimen>
+    <dimen name="minimized_sheet_radius">20dp</dimen>
 
     <style name="Divider">
         <item name="android:background">?android:attr/listDivider</item>
