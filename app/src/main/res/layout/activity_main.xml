@@ -12,18 +12,11 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/show_button_java"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Google Bottom Drawer (Java)" />
-
-        <Button
             android:id="@+id/show_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Google Bottom Drawer (Kotlin)" />
+            android:text="Google Bottom Drawer" />
 
         <Button
             android:id="@+id/show_button_sample"
